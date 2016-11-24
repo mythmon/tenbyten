@@ -1,0 +1,27 @@
+.wrapper {
+  margin: auto;
+  width: 1000px;
+}
+
+.doc-navbar {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  padding: 10px 5px;
+}
+
+.doc-navbar a,
+.doc-navbar a:link,
+.doc-navbar a:hover,
+.doc-navbar a:active,
+.doc-navbar a:visited {
+  color: #000;
+  text-decoration: none
+}
+
+.doc-logo {
+  font-weight: bold;
+}
+
+.doc-content {
+  padding: 10px;
+}
