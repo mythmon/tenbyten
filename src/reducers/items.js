@@ -1,6 +1,6 @@
 import { UPDATE_ITEM } from 'tenbyten/actions/items'
 
-export default function playReducer (state = {}, action) {
+export default function itemsReducer (state = {}, action) {
   switch (action.type) {
     case UPDATE_ITEM: {
       return {

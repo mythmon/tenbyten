@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import { requestPlayList } from 'tenbyten/actions/plays'
 
-class QueryWordEntry extends Component {
+class QueryPlays extends Component {
   static propTypes = {
     username: pt.string.isRequired,
     inProgress: pt.bool.isRequired,
@@ -45,4 +45,4 @@ export default connect(
                state.requests[`playList/${username}`]),
   }),
   dispatch => bindActionCreators({requestPlayList}, dispatch),
-)(QueryWordEntry)
+)(QueryPlays)
