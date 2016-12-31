@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 
-import { createApp } from 'thedoc/app.js'
+import { createApp } from 'tenbyten/app.js'
 
 // Initialize the control app and render it.
 const app = createApp()

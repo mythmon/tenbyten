@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
 
-import words from 'thedoc/reducers/words'
-import requests from 'thedoc/reducers/requests'
+import plays from 'tenbyten/reducers/plays'
+import items from 'tenbyten/reducers/items'
+import requests from 'tenbyten/reducers/requests'
 
 export default combineReducers({
-  words,
+  plays,
+  items,
   routing,
   requests,
 })

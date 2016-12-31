@@ -1,6 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 function local (p) {
   return path.resolve(__dirname, './' + p)
@@ -20,7 +19,6 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin(),
-    new CopyWebpackPlugin([{from: local('api'), to: 'api'}]),
   ],
 
   output: {
@@ -48,7 +46,7 @@ module.exports = {
 
   resolve: {
     alias: {
-      thedoc: local('src'),
+      tenbyten: local('src'),
     },
   },
 }

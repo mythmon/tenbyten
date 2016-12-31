@@ -1,4 +1,4 @@
-import { requestActionTypes } from 'thedoc/actions/requests'
+import { requestActionTypes } from 'tenbyten/actions/requests'
 
 export default function requestsReducer (state = {}, action) {
   switch (action.type) {

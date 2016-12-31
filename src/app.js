@@ -3,8 +3,8 @@ import { Provider } from 'react-redux'
 import { Router, hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import { configureStore } from 'thedoc/store'
-import Routes from 'thedoc/routes'
+import { configureStore } from 'tenbyten/store'
+import Routes from 'tenbyten/routes'
 
 /**
  * Root Component for the entire app.

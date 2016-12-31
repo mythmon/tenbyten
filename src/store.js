@@ -4,7 +4,7 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
-import reducers from 'thedoc/reducers'
+import reducers from 'tenbyten/reducers'
 
 const reduxRouterMiddleware = routerMiddleware(hashHistory)
 

@@ -5,11 +5,7 @@ export default function Header () {
   return (
     <nav className='doc-navbar'>
       <Link to='/'>
-        <span className='doc-logo'>DOC</span>
-        <span>
-          {' - '}
-          Documentation of Culture
-        </span>
+        <span className='doc-logo'>10x10</span>
       </Link>
     </nav>
   )
