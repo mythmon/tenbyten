@@ -1,8 +1,11 @@
 import React, { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
 import QueryPlays from 'tenbyten/components/data/QueryPlays'
 import QueryGeekList from 'tenbyten/components/data/QueryGeekList'
+import { getPlays } from 'tenbyten/selectors/plays'
+import { getGeekList219091 } from 'tenbyten/selectors/geekLists'
 
 class TenByTen extends Component {
   static propTypes = {
@@ -45,18 +48,7 @@ class TenByTen extends Component {
   }
 }
 
-export default connect(state => ({
-  plays: Object.values(state.plays).map(play => {
-    return {
-      ...play,
-      item: state.items[play.item],
-    }
-  }),
-  geekList: state.geekLists[219091]
-    ? {
-      id: state.geekLists[219091].id,
-      items: state.geekLists[219091].items.map(itemId => state.items[itemId]),
-    }
-    : undefined,
-  state,
+export default connect(createStructuredSelector({
+  plays: getPlays,
+  geekList: getGeekList219091,
 }))(TenByTen)
