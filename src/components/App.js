@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as pt } from 'react'
 
-import Header from 'tenbyten/components/Header.js'
+import Header from 'tenbyten/components/Header'
+import LoadingIndicator from 'tenbyten/components/LoadingIndicator'
 
 export default class ControlApp extends Component {
   static propTypes = {
@@ -11,9 +12,12 @@ export default class ControlApp extends Component {
     const { children } = this.props
     return (
       <div>
-        <Header />
-        <div className='tenbyten-content'>
-          { React.Children.map(children, child => React.cloneElement(child)) }
+        <LoadingIndicator />
+        <div className='wrapper'>
+          <Header />
+          <div className='content'>
+            { React.Children.map(children, child => React.cloneElement(child)) }
+          </div>
         </div>
       </div>
     )

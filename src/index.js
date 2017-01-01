@@ -9,7 +9,6 @@ let container = document.querySelector('#container')
 if (!container) {
   container = document.createElement('div')
   container.id = 'container'
-  container.classList.add('wrapper')
   document.body.appendChild(container)
 }
 

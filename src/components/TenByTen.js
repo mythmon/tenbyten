@@ -24,9 +24,7 @@ class TenByTen extends Component {
   }
 
   render () {
-    const {state, plays, geekList} = this.props
-
-    console.log('TenByTen::render - geekList', geekList)
+    const {plays, geekList} = this.props
 
     return (
       <div>
