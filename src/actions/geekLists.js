@@ -1,5 +1,5 @@
 import { requestStart, requestSuccess, requestFail } from 'tenbyten/actions/requests'
-import { updateItem } from 'tenbyten/actions/items'
+import { updateItemMany } from 'tenbyten/actions/items'
 
 export const ADD_GEEK_LIST = 'ADD_GEEK_LIST'
 
@@ -38,6 +38,7 @@ export function requestGeekList (listId) {
     const parser = new DOMParser()
     const doc = parser.parseFromString(docString, 'application/xml')
     const geekList = doc.querySelector('geeklist')
+    const itemObjs = []
 
     let geekListObj = {
       id: parseInt(geekList.getAttribute('id')),
@@ -46,11 +47,12 @@ export function requestGeekList (listId) {
           id: parseInt(item.getAttribute('objectid')),
           name: item.getAttribute('objectname'),
         }
-        dispatch(updateItem(itemObj))
+        itemObjs.push(itemObj)
         return itemObj.id
       }),
     }
 
+    dispatch(updateItemMany(itemObjs))
     dispatch(addGeekList(geekListObj))
   }
 }

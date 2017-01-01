@@ -1,4 +1,4 @@
-import { UPDATE_ITEM } from 'tenbyten/actions/items'
+import { UPDATE_ITEM, UPDATE_ITEM_MANY } from 'tenbyten/actions/items'
 
 export default function itemsReducer (state = {}, action) {
   switch (action.type) {
@@ -10,6 +10,17 @@ export default function itemsReducer (state = {}, action) {
           ...action.item,
         },
       }
+    }
+
+    case UPDATE_ITEM_MANY: {
+      let newState = {...state}
+      for (let item of action.items) {
+        newState[item.id] = {
+          ...newState[item.id],
+          ...item,
+        }
+      }
+      return newState
     }
 
     default: {

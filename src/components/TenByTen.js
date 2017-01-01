@@ -28,7 +28,7 @@ class TenByTen extends Component {
 
     return (
       <div>
-        <QueryPlays username='gca3020' />
+        <QueryPlays username='mythmon' />
         <QueryGeekList listId={219091} />
 
         <ul>

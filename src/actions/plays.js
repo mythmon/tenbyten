@@ -1,15 +1,23 @@
 import { requestStart, requestSuccess, requestFail } from 'tenbyten/actions/requests'
-import { updateItem } from 'tenbyten/actions/items'
+import { updateItemMany } from 'tenbyten/actions/items'
 
 export const ADD_PLAY = 'ADD_PLAY'
+export const ADD_PLAY_MANY = 'ADD_PLAY_MANY'
 
 // const API_URL = 'https://crossorigin.me/https://www.boardgamegeek.com/xmlapi2'
 const API_URL = 'http://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2'
 
-function addPlay (play) {
+export function addPlay (play) {
   return {
     type: ADD_PLAY,
     play,
+  }
+}
+
+export function addPlayMany (plays) {
+  return {
+    type: ADD_PLAY_MANY,
+    plays,
   }
 }
 
@@ -38,6 +46,8 @@ export function requestPlayList (username) {
 
     const parser = new DOMParser()
     const doc = parser.parseFromString(docString, 'application/xml')
+    const plays = []
+    const items = []
 
     for (let play of doc.querySelectorAll('play')) {
       const item = play.querySelector('item')
@@ -50,8 +60,11 @@ export function requestPlayList (username) {
         date: new Date(play.getAttribute('date')),
         item: itemObj.id,
       }
-      dispatch(updateItem(itemObj))
-      dispatch(addPlay(playObj))
+      items.push(itemObj)
+      plays.push(playObj)
     }
+
+    dispatch(updateItemMany(items))
+    dispatch(addPlayMany(plays))
   }
 }

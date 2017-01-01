@@ -5,7 +5,7 @@ export default function Header () {
   return (
     <nav className='navbar'>
       <Link to='/'>
-        <span className='logo'>10x10</span>
+        <span className='logo'>10×10</span>
       </Link>
     </nav>
   )
