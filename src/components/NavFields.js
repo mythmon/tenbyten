@@ -2,6 +2,7 @@ import React, { Component, PropTypes as pt } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { Form } from 'semantic-ui-react'
 
 class NavFields extends Component {
   static propTypes = {
@@ -40,6 +41,18 @@ class NavFields extends Component {
 
   render () {
     const {name, list} = this.state
+
+    return (
+      <div>
+        <Form size='mini' onSubmit={this.navigate}>
+          <Form.Group inline>
+            <Form.Input label='Username' name='name' value={name} onChange={this.handleChange} />
+            <Form.Input label='Geeklist ID' name='list' value={list} onChange={this.handleChange} />
+            <Form.Button type='submit' size='mini'>Go</Form.Button>
+          </Form.Group>
+        </Form>
+      </div>
+    )
 
     return (
       <div>

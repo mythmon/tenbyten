@@ -1,7 +1,8 @@
 import React, { Component, PropTypes as pt } from 'react'
 import moment from 'moment'
 import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
-import FaExclamationCircle from 'react-icons/lib/fa/exclamation-circle'
+import FaCommentingO from 'react-icons/lib/fa/commenting-o'
+import { Table } from 'semantic-ui-react'
 
 import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 
@@ -53,20 +54,22 @@ export default class ItemPlaysRow extends Component {
     } else if (play.comments && play.comments.trim() !== '') {
       icons.push(
         <span name='comments' key='comments' title={play.comments}>
-          <FaExclamationCircle />
+          <FaCommentingO />
         </span>
       )
     }
 
     return (
-      <td className='play-cell'>
-        <div className='info'>
-          {info}
+      <Table.Cell>
+        <div className='play-cell'>
+          <div className='info-set'>
+            {info}
+          </div>
+          <div className='icon-set'>
+            {icons}
+          </div>
         </div>
-        <div className='icons'>
-          {icons}
-        </div>
-      </td>
+      </Table.Cell>
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
 import { createSelector, createStructuredSelector } from 'reselect'
+import { Table } from 'semantic-ui-react'
 
 import PlaysRow from 'tenbyten/components/PlaysRow'
 import NavFields from 'tenbyten/components/NavFields'
@@ -29,18 +30,18 @@ class TenByTen extends Component {
     let content
 
     if (ready) {
-      const headers = [<th key='header-title'>Game</th>]
+      const headers = [<Table.HeaderCell key='header-title'>Game</Table.HeaderCell>]
       for (let i = 1; i < 11; i++) {
-        headers.push(<th key={`header-${i}`}>{i}</th>)
+        headers.push(<Table.HeaderCell key={`header-${i}`}>{i}</Table.HeaderCell>)
       }
       content = (
-        <table className='ten-by-ten'>
-          <thead>
-            <tr>
+        <Table fixed celled className='ten-by-ten'>
+          <Table.Header>
+            <Table.Row>
               {headers}
-            </tr>
-          </thead>
-          <tbody>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {geekList.items.map(item => (
               <PlaysRow
                 key={`playrow-${item.id}`}
@@ -48,8 +49,8 @@ class TenByTen extends Component {
                 plays={playsByItem[item.id] || []}
               />
             ))}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table>
       )
     } else {
       content = <span>...</span>

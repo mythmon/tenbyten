@@ -10,6 +10,7 @@ module.exports = {
     main: [
       'babel-polyfill',
       'normalize.css',
+      'semantic-ui-css/semantic.css',
       './src/style.css',
       './src/index.js',
     ],
@@ -35,10 +36,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        // include: [local('src'), local('node_modules/semantic-ui-css')],
         loaders: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
+        test: /\.(png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
         loader: 'file-loader',
       },
     ],

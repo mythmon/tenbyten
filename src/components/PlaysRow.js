@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as pt } from 'react'
 import moment from 'moment'
+import { Table } from 'semantic-ui-react'
 
 import PlayCell from 'tenbyten/components/PlayCell'
 
@@ -36,7 +37,7 @@ export default class ItemPlaysRow extends Component {
 
     while (playCells.length < maxPlays) {
       playCells.push(
-        <td key={`empty-play-${playCells.length}`} />
+        <Table.Cell key={`empty-play-${playCells.length}`} />
       )
     }
 
@@ -47,8 +48,8 @@ export default class ItemPlaysRow extends Component {
     }
 
     return (
-      <tr>
-        <th>
+      <Table.Row>
+        <Table.Cell>
           <header>
             {item.name}
           </header>
@@ -57,10 +58,10 @@ export default class ItemPlaysRow extends Component {
               Ø {averagePlayTime} mins
             </div>
           }
-        </th>
+        </Table.Cell>
         {playCells}
         <script type='application/json' dangerouslySetInnerHTML={{__html: JSON.stringify(this.props)}} />
-      </tr>
+      </Table.Row>
     )
   }
 }
