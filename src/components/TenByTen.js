@@ -28,6 +28,21 @@ class TenByTen extends Component {
     if (ready) {
       content = (
         <table className='ten-by-ten'>
+          <thead>
+            <tr>
+              <th>Game</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>6</th>
+              <th>7</th>
+              <th>8</th>
+              <th>9</th>
+              <th>10</th>
+            </tr>
+          </thead>
           <tbody>
             {geekList.items.map(item => (
               <PlaysRow

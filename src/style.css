@@ -59,23 +59,29 @@
   border-collapse: collapse;
 }
 
-.ten-by-ten th,
-.ten-by-ten td {
+.ten-by-ten tbody th,
+.ten-by-ten tbody td,
+.ten-by-ten thead th,
+.ten-by-ten thead td {
   text-align: center;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   min-width: 75px;
   padding: 5px 10px;
-  height: 2.8em;
   line-height: 1.4em;
 }
 
-.ten-by-ten th {
+.ten-by-ten tbody th,
+.ten-by-ten tbody td {
+  height: 2.8em;
+}
+
+.ten-by-ten tbody th {
   min-width: 185px;
   font-size: 0.9em;
 }
 
-.ten-by-ten td .meta {
+.ten-by-ten tbody td .meta {
   font-style: italic;
   font-size: 0.9em;
 }
