@@ -3,6 +3,7 @@ import yaml from 'js-yaml'
 
 import { requestStart, requestSuccess, requestFail } from 'tenbyten/actions/requests'
 import { updateItemMany } from 'tenbyten/actions/items'
+import { toast } from 'tenbyten/actions/toast'
 
 export const ADD_PLAY = 'ADD_PLAY'
 export const ADD_PLAY_MANY = 'ADD_PLAY_MANY'
@@ -32,7 +33,7 @@ export function requestPlayList (username) {
     let docString
 
     try {
-      const response = await fetch(`${API_URL}/plays?username=${username}`)
+      const response = await fetch(`${API_URL}/plays?username=${username}&mindate=2017-01-01&max-date=2017-12-31`)
       if (response.state >= 400) {
         let e = new Error(await response.text())
         e.response = response
@@ -49,33 +50,50 @@ export function requestPlayList (username) {
 
     const parser = new DOMParser()
     const doc = parser.parseFromString(docString, 'application/xml')
-    const plays = []
-    const items = []
+    const plays = doc.querySelector('plays')
 
-    for (let play of doc.querySelectorAll('play')) {
+    if (!plays) {
+      dispatch(toast('error', `Could not load plays for player ${username}`))
+      return
+    }
+
+    const creator = plays.getAttribute('username')
+    const playsObjs = []
+    const itemsObjs = []
+
+    for (let play of plays.querySelectorAll('play')) {
       const item = play.querySelector('item')
       const itemObj = {
         id: parseInt(item.getAttribute('objectid')),
         name: item.getAttribute('name'),
       }
+      const comments = play.querySelector('comments') || null
       const playObj = {
+        creator,
         id: parseInt(play.getAttribute('id')),
         date: moment(play.getAttribute('date'), 'YYYY-MM-DD', true),
         item: itemObj.id,
-        comments: play.querySelector('comments').textContent,
+        comments: comments ? comments.textContent : null,
         commentsParsed: null,
-        length: play.getAttribute('length'),
+        length: parseInt(play.getAttribute('length')),
       }
-      try {
-        playObj.commentsParsed = yaml.safeLoad(playObj.comments)
-      } catch (e) {
-        // pass
+
+      if (playObj.comments && playObj.comments !== '') {
+        try {
+          playObj.commentsParsed = yaml.safeLoad(playObj.comments)
+        } catch (e) {
+          // pass
+        }
       }
-      items.push(itemObj)
-      plays.push(playObj)
+      if (isNaN(playObj.length)) {
+        playObj.length = null
+      }
+
+      itemsObjs.push(itemObj)
+      playsObjs.push(playObj)
     }
 
-    dispatch(updateItemMany(items))
-    dispatch(addPlayMany(plays))
+    dispatch(updateItemMany(itemsObjs))
+    dispatch(addPlayMany(playsObjs))
   }
 }

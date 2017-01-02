@@ -34,7 +34,7 @@ export default class ItemPlaysRow extends Component {
           </div>
         )
       }
-    } else if (comments.trim() !== '') {
+    } else if (comments && comments.trim() !== '') {
       meta = <div className='meta'>{comments}</div>
     }
 

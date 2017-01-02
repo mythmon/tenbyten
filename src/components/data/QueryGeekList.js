@@ -13,17 +13,17 @@ class QueryGeekList extends Component {
   }
 
   componentWillMount () {
-    this.request()
+    this.request(this.props)
   }
 
   componentWillReceiveProps (newProps) {
     if (this.props.listId !== newProps.listId) {
-      this.request()
+      this.request(newProps)
     }
   }
 
-  request () {
-    const { inProgress, listId, loaded, requestGeekList } = this.props
+  request (props) {
+    const { inProgress, listId, loaded, requestGeekList } = props
     if (!inProgress && !loaded) {
       requestGeekList(listId)
     }

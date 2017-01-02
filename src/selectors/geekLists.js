@@ -1,8 +1,21 @@
-export const getGeekList219091 = state => (
-  state.geekLists[219091]
-  ? {
-    ...state.geekLists[219091],
-    items: state.geekLists[219091].items.map(itemId => state.items[itemId]),
+import { createSelector } from 'reselect'
+
+import { getItems } from 'tenbyten/selectors/items'
+
+export const getCurrentGeekListId = (state, props) => props.params.listId
+
+export const getAllGeekLists = state => state.geekLists
+
+export const getGeekList = createSelector(
+  [getCurrentGeekListId, getAllGeekLists, getItems],
+  (geekListId, allGeekLists, items) => {
+    if (!(geekListId in allGeekLists)) {
+      return null
+    }
+    const geekList = allGeekLists[geekListId]
+    return {
+      ...geekList,
+      items: geekList.items.map(itemId => items[itemId]),
+    }
   }
-  : null
 )

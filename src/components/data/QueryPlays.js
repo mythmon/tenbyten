@@ -13,17 +13,17 @@ class QueryPlays extends Component {
   }
 
   componentWillMount () {
-    this.request()
+    this.request(this.props)
   }
 
   componentWillReceiveProps (newProps) {
     if (this.props.username !== newProps.username) {
-      this.request()
+      this.request(newProps)
     }
   }
 
-  request () {
-    const { inProgress, username, loaded, requestPlayList } = this.props
+  request (props) {
+    const { inProgress, username, loaded, requestPlayList } = props
     if (!inProgress && !loaded) {
       requestPlayList(username)
     }
