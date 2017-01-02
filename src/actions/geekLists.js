@@ -26,6 +26,11 @@ export function requestGeekList (listId) {
         e.response = response
         dispatch(requestFail(requestId, e))
         return
+      } else if (response.state === 202) {
+        // request accepted, retry for actual content
+        dispatch(requestSuccess(requestId))
+        setTimeout(() => dispatch(requestGeekList(listId)), 5000)
+        return
       } else {
         dispatch(requestSuccess(requestId))
         docString = await response.text()
