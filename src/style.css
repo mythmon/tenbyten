@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 .wrapper {
   margin: 2vh auto;
   width: 1000px;
@@ -65,9 +61,21 @@
 
 .ten-by-ten th,
 .ten-by-ten td {
-  text-align: left;
+  text-align: center;
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   min-width: 75px;
   padding: 5px 10px;
+  height: 2.8em;
+  line-height: 1.4em;
+}
+
+.ten-by-ten th {
+  min-width: 185px;
+  font-size: 0.9em;
+}
+
+.ten-by-ten td .meta {
+  font-style: italic;
+  font-size: 0.9em;
 }

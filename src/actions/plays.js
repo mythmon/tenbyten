@@ -1,4 +1,5 @@
 import moment from 'moment'
+import yaml from 'js-yaml'
 
 import { requestStart, requestSuccess, requestFail } from 'tenbyten/actions/requests'
 import { updateItemMany } from 'tenbyten/actions/items'
@@ -61,6 +62,13 @@ export function requestPlayList (username) {
         id: parseInt(play.getAttribute('id')),
         date: moment(play.getAttribute('date'), 'YYYY-MM-DD', true),
         item: itemObj.id,
+        comments: play.querySelector('comments').textContent,
+        commentsParsed: null,
+      }
+      try {
+        playObj.commentsParsed = yaml.safeLoad(playObj.comments)
+      } catch (e) {
+        // pass
       }
       items.push(itemObj)
       plays.push(playObj)

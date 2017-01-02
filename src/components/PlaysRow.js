@@ -1,6 +1,8 @@
 import React, { Component, PropTypes as pt } from 'react'
 import moment from 'moment'
 
+import PlayCell from 'tenbyten/components/PlayCell'
+
 export default class ItemPlaysRow extends Component {
   static propTypes = {
     item: pt.shape({
@@ -10,6 +12,8 @@ export default class ItemPlaysRow extends Component {
     plays: pt.arrayOf(pt.shape({
       id: pt.number.isRequired,
       date: pt.instanceOf(moment).isRequired,
+      comments: pt.string,
+      commentsParsed: pt.object,
     })).isRequired,
     maxPlays: pt.number,
     showOverflow: pt.bool,
@@ -21,14 +25,12 @@ export default class ItemPlaysRow extends Component {
   }
 
   render () {
-    const {item, plays, maxPlays, showOverflow} = this.props
+    const {item, plays, maxPlays} = this.props
 
     const playCells = []
     for (let play of plays.slice(0, maxPlays)) {
       playCells.push(
-        <td key={`play-${play.id}`}>
-          {play.date.format('MMM Do')}
-        </td>
+        <PlayCell key={`play-cell-${play.id}`} play={play} />
       )
     }
 
