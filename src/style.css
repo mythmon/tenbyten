@@ -56,3 +56,18 @@
     transform: translate3d(100vw, 0, 0);
   }
 }
+
+.ten-by-ten {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-collapse: collapse;
+}
+
+.ten-by-ten th,
+.ten-by-ten td {
+  text-align: left;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  min-width: 75px;
+  padding: 5px 10px;
+}

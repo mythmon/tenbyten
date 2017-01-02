@@ -1,54 +1,60 @@
 import React, { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { createSelector, createStructuredSelector } from 'reselect'
 
+import PlaysRow from 'tenbyten/components/PlaysRow'
 import QueryPlays from 'tenbyten/components/data/QueryPlays'
 import QueryGeekList from 'tenbyten/components/data/QueryGeekList'
-import { getPlays } from 'tenbyten/selectors/plays'
+import { getPlaysByItem } from 'tenbyten/selectors/plays'
 import { getGeekList219091 } from 'tenbyten/selectors/geekLists'
 
 class TenByTen extends Component {
   static propTypes = {
-    plays: pt.arrayOf(pt.shape({
-      id: pt.number.isRequired,
-      date: pt.instanceOf(Date).isRequired,
-      item: pt.shape({
-        id: pt.number.isRequired,
-        name: pt.string.isRequired,
-      }).isRequired,
-    })).isRequired,
+    ready: pt.bool.isRequired,
+    playsByItem: pt.object,
     geekList: pt.shape({
       items: pt.arrayOf(pt.shape({
         id: pt.number.isRequired,
         name: pt.string.isRequired,
       })),
     }),
-    state: pt.object,
   }
 
   render () {
-    const {plays, geekList} = this.props
+    const {ready, playsByItem, geekList} = this.props
+
+    let content
+
+    if (ready) {
+      content = (
+        <table className='ten-by-ten'>
+          <tbody>
+            {geekList.items.map(item => (
+              <PlaysRow
+                key={`playrow-${item.id}`}
+                item={item}
+                plays={playsByItem[item.id] || []}
+              />
+            ))}
+          </tbody>
+        </table>
+      )
+    } else {
+      content = <span>Not ready</span>
+    }
 
     return (
       <div>
         <QueryPlays username='mythmon' />
         <QueryGeekList listId={219091} />
-
-        <ul>
-          {geekList && geekList.items.map(item => <li key={item.id}>{item.name}</li>)}
-        </ul>
-
-        <ul>
-          {plays.map(play => (
-            <li key={play.id}>{play.date.toLocaleString()} - {play.item.name}</li>
-          ))}
-        </ul>
+        {content}
       </div>
     )
   }
 }
 
 export default connect(createStructuredSelector({
-  plays: getPlays,
+  playsByItem: getPlaysByItem,
   geekList: getGeekList219091,
+  ready: createSelector([getGeekList219091], geekList => geekList !== null),
 }))(TenByTen)

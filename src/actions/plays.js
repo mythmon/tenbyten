@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import { requestStart, requestSuccess, requestFail } from 'tenbyten/actions/requests'
 import { updateItemMany } from 'tenbyten/actions/items'
 
@@ -57,7 +59,7 @@ export function requestPlayList (username) {
       }
       const playObj = {
         id: parseInt(play.getAttribute('id')),
-        date: new Date(play.getAttribute('date')),
+        date: moment(play.getAttribute('date'), 'YYYY-MM-DD', true),
         item: itemObj.id,
       }
       items.push(itemObj)
