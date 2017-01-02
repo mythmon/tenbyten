@@ -1,15 +1,12 @@
 import moment from 'moment'
 import yaml from 'js-yaml'
 
-import { requestStart, requestSuccess, requestFail } from 'tenbyten/actions/requests'
 import { updateItemMany } from 'tenbyten/actions/items'
 import { toast } from 'tenbyten/actions/toast'
+import { makeBGGRequest } from 'tenbyten/actions/requests'
 
 export const ADD_PLAY = 'ADD_PLAY'
 export const ADD_PLAY_MANY = 'ADD_PLAY_MANY'
-
-// const API_URL = 'https://crossorigin.me/https://www.boardgamegeek.com/xmlapi2'
-const API_URL = 'http://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com/xmlapi2'
 
 export function addPlay (play) {
   return {
@@ -25,29 +22,11 @@ export function addPlayMany (plays) {
   }
 }
 
-export function requestPlayList (username) {
+export function requestPlayList (username, page = 1) {
   return async dispatch => {
     const requestId = `playList/${username}`
-    dispatch(requestStart(requestId))
-
-    let docString
-
-    try {
-      // const response = await fetch(`${API_URL}/plays?username=${username}&mindate=2017-01-01&max-date=2017-12-31`)
-      const response = await fetch(`${API_URL}/plays?username=${username}`)
-      if (response.state >= 400) {
-        let e = new Error(await response.text())
-        e.response = response
-        dispatch(requestFail(requestId, e))
-        return
-      } else {
-        dispatch(requestSuccess(requestId))
-        docString = await response.text()
-      }
-    } catch (e) {
-      dispatch(requestFail(requestId, e))
-      return
-    }
+    const response = await dispatch(makeBGGRequest(requestId, '/xmlapi2/plays', {username, page}))
+    const docString = await response.text()
 
     const parser = new DOMParser()
     const doc = parser.parseFromString(docString, 'application/xml')
@@ -56,6 +35,11 @@ export function requestPlayList (username) {
     if (!plays) {
       dispatch(toast('error', `Could not load plays for player ${username}`))
       return
+    }
+
+    const playsPerPage = 100
+    if (plays.getAttribute('total') > page * playsPerPage) {
+      dispatch(requestPlayList(username, page + 1))
     }
 
     const creator = plays.getAttribute('username')
