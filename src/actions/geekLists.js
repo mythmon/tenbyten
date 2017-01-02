@@ -27,6 +27,7 @@ export function requestGeekList (listId) {
         dispatch(requestFail(requestId, e))
         return
       } else if (response.state === 202) {
+        console.log('got 202, retrying')
         // request accepted, retry for actual content
         dispatch(requestSuccess(requestId))
         setTimeout(() => dispatch(requestGeekList(listId)), 5000)

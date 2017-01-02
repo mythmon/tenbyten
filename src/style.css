@@ -69,12 +69,12 @@
   border-bottom: 1px solid black;
   min-width: 75px;
   padding: 0.2em;
-  line-height: 1.4em;
 }
 
 .ten-by-ten tbody th,
 .ten-by-ten tbody td {
-  height: 2.6em;
+  height: 2.1em;
+  min-height: 2.1em;
 }
 
 .ten-by-ten tbody th {
@@ -90,7 +90,25 @@
   font-weight: bold;
 }
 
-.ten-by-ten tbody td .meta {
+.ten-by-ten .play-cell {
+}
+
+.ten-by-ten .play-cell .info {
+  font-size: 0.8em;
   font-style: italic;
-  font-size: 0.9em;
+}
+
+.ten-by-ten .play-cell .info [name=date] {
+  font-size: 1.25em;  /* 1.0 / 0.8 == 1.25 */
+  font-style: normal;
+}
+
+.ten-by-ten .play-cell .icons {
+  text-align: right;
+  width: 100%;
+}
+
+.ten-by-ten .play-cell .icons > * {
+  max-height: 16px;
+  max-width: 16px;
 }
