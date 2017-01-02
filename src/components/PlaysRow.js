@@ -40,9 +40,23 @@ export default class ItemPlaysRow extends Component {
       )
     }
 
+    let averagePlayTime = null
+    if (plays.length > 0) {
+      averagePlayTime = plays.map(play => play.length).reduce((a, b) => a + b, 0) / plays.length
+    }
+
     return (
       <tr>
-        <th>{item.name}</th>
+        <th>
+          <header>
+            {item.name}
+          </header>
+          {averagePlayTime &&
+            <div>
+              {averagePlayTime && `Ø ${averagePlayTime} mins`}
+            </div>
+          }
+        </th>
         {playCells}
       </tr>
     )

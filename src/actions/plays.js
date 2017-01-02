@@ -64,6 +64,7 @@ export function requestPlayList (username) {
         item: itemObj.id,
         comments: play.querySelector('comments').textContent,
         commentsParsed: null,
+        length: play.getAttribute('length'),
       }
       try {
         playObj.commentsParsed = yaml.safeLoad(playObj.comments)

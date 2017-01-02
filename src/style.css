@@ -1,6 +1,5 @@
 .wrapper {
-  margin: 2vh auto;
-  width: 1000px;
+  margin: 2vh;
 }
 
 .navbar {
@@ -67,18 +66,26 @@
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   min-width: 75px;
-  padding: 5px 10px;
+  padding: 0.2em;
   line-height: 1.4em;
 }
 
 .ten-by-ten tbody th,
 .ten-by-ten tbody td {
-  height: 2.8em;
+  height: 2.6em;
 }
 
 .ten-by-ten tbody th {
   min-width: 185px;
   font-size: 0.9em;
+}
+
+.ten-by-ten tbody th {
+  font-weight: normal;
+}
+
+.ten-by-ten tbody th header {
+  font-weight: bold;
 }
 
 .ten-by-ten tbody td .meta {

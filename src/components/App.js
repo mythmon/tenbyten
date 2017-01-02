@@ -11,7 +11,7 @@ export default class ControlApp extends Component {
   render () {
     const { children } = this.props
     return (
-      <div>
+      <div className='root'>
         <LoadingIndicator />
         <div className='wrapper'>
           <Header />
