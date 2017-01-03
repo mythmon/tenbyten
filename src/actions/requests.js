@@ -3,7 +3,7 @@ export const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
 export const REQUEST_FAIL = 'REQUEST_FAIL'
 export const REQUEST_PENDING = 'REQUEST_PENDING'
 
-const BGG_BASE_URL = 'http://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com'
+const BGG_BASE_URL = 'https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com'
 export function makeBGGRequest (requestId, endpoint, query = {}) {
   return async dispatch => {
     let url = new URL(BGG_BASE_URL + endpoint)
