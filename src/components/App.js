@@ -18,6 +18,9 @@ export default class ControlApp extends Component {
           <div className='content'>
             { React.Children.map(children, child => React.cloneElement(child)) }
           </div>
+          <footer>
+            <a href='https://github.com/mythmon/tenbyten'>Source on GitHub</a>
+          </footer>
         </div>
       </div>
     )
