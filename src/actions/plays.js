@@ -24,12 +24,14 @@ export function addPlayMany (plays) {
 
 export function requestPlayList (username, startDate, endDate, page = 1) {
   return async dispatch => {
-    const requestId = `playList/${username}`
+    let mindate = startDate.format('YYYY-MM-DD')
+    let maxdate = endDate.format('YYYY-MM-DD')
+    const requestId = `playList/${username}/${mindate}/${maxdate}`
     const response = await dispatch(makeBGGRequest(requestId, '/xmlapi2/plays', {
       username,
       page,
-      mindate: startDate.format('YYYY-MM-DD'),
-      maxdate: endDate.format('YYYY-MM-DD'),
+      mindate,
+      maxdate,
     }))
     const docString = await response.text()
 

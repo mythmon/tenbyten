@@ -7,8 +7,10 @@ import { requestGeekList } from 'tenbyten/actions/geekLists'
 class QueryGeekList extends Component {
   static propTypes = {
     listId: pt.number.isRequired,
-    inProgress: pt.bool.isRequired,
-    loaded: pt.bool.isRequired,
+    requestState: pt.shape({
+      inProgress: pt.bool.isRequired,
+      error: pt.object,
+    }),
     requestGeekList: pt.func.isRequired,
   }
 
@@ -23,8 +25,9 @@ class QueryGeekList extends Component {
   }
 
   request (props) {
-    const { inProgress, listId, loaded, requestGeekList } = props
-    if (!inProgress && !loaded) {
+    const { listId, requestState, requestGeekList } = props
+    if (!requestState) {
+      console.log('making geekList request', requestState)
       requestGeekList(listId)
     }
   }
@@ -37,11 +40,7 @@ class QueryGeekList extends Component {
 export default connect(
   (state, { listId }) => ({
     listId,
-    inProgress: state.requests[`geekList/${listId}`]
-                ? state.requests[`geekList/${listId}`].inProgress
-                : false,
-    loaded: !!(state.geekLists[listId] &&
-               state.requests[`geekList/${listId}`]),
+    requestState: state.requests[`geekList/${listId}`],
   }),
   dispatch => bindActionCreators({requestGeekList}, dispatch),
 )(QueryGeekList)

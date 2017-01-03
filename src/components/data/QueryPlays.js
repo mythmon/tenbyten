@@ -10,8 +10,10 @@ class QueryPlays extends Component {
     username: pt.string.isRequired,
     startDate: pt.instanceOf(moment).isRequired,
     endDate: pt.instanceOf(moment).isRequired,
-    inProgress: pt.bool.isRequired,
-    loaded: pt.bool.isRequired,
+    requestState: pt.shape({
+      inProgress: pt.bool.isRequired,
+      error: pt.object,
+    }),
     requestPlayList: pt.func.isRequired,
   }
 
@@ -21,15 +23,15 @@ class QueryPlays extends Component {
 
   componentWillReceiveProps (newProps) {
     if (this.props.username !== newProps.username ||
-        this.props.startDate !== newProps.startDate ||
-        this.props.endDate !== newProps.endDate) {
+        !this.props.startDate.isSame(newProps.startDate) ||
+        !this.props.endDate.isSame(newProps.endDate)) {
       this.request(newProps)
     }
   }
 
   request (props) {
-    const { inProgress, username, startDate, endDate, loaded, requestPlayList } = props
-    if (!inProgress && !loaded) {
+    const { username, startDate, endDate, requestState, requestPlayList } = props
+    if (!requestState) {
       requestPlayList(username, startDate, endDate)
     }
   }
@@ -40,14 +42,16 @@ class QueryPlays extends Component {
 }
 
 export default connect(
-  (state, ownProps) => ({
-    ...ownProps,
-    inProgress: state.requests[`playList/${ownProps.username}`]
-                ? state.requests[`playList/${ownProps.username}`].inProgress
-                : false,
-    loaded: !!(state.plays &&
-               Object.keys(state.plays).length > 0 &&
-               state.requests[`playList/${ownProps.username}`]),
-  }),
+  (state, {username, startDate, endDate}) => {
+    let fmt = 'YYYY-MM-DD'
+    let requestKey = `playList/${username}/${startDate.format(fmt)}/${endDate.format(fmt)}`
+
+    return {
+      username,
+      startDate,
+      endDate,
+      requestState: state.requests[requestKey],
+    }
+  },
   dispatch => bindActionCreators({requestPlayList}, dispatch),
 )(QueryPlays)
