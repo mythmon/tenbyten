@@ -11,7 +11,6 @@ module.exports = {
     main: [
       'babel-polyfill',
       'normalize.css',
-      'semantic-ui-css/semantic.css',
       './src/style.css',
       './src/index.js',
     ],
@@ -21,6 +20,15 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => /node_modules/.test(module.resource),
+    }),
     // Only include english locale in moment
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
   ],
@@ -31,7 +39,7 @@ module.exports = {
 
   output: {
     path: local('build'),
-    filename: '[name].js',
+    filename: '[name]-[hash].js',
   },
 
   module: {

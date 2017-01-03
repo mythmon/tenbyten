@@ -1,7 +1,10 @@
 {
   "license": "MIT",
   "scripts": {
-    "build": "webpack -p --config webpack.config.prod.js"
+    "build": "webpack -p --config webpack.config.prod.js",
+    "clean": "rimraf build",
+    "predeploy": "npm run clean; npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "babel-eslint": "^7.1.1",
@@ -43,6 +46,7 @@
     "gh-pages": "^0.12.0",
     "html-webpack-plugin": "^2.25.0",
     "redux-logger": "^2.7.4",
+    "rimraf": "^2.5.4",
     "style-loader": "^0.13.1",
     "webpack": "2.2.0-rc.3",
     "webpack-dev-server": "2.2.0-rc.0"
