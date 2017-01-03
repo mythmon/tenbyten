@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as pt } from 'react'
 import moment from 'moment'
-import { Table } from 'semantic-ui-react'
+import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
+import 'semantic-ui-css/components/table.css'
 
 import PlayCell from 'tenbyten/components/PlayCell'
 

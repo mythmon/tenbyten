@@ -36,7 +36,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // include: [local('src'), local('node_modules/semantic-ui-css')],
         loaders: ['style-loader', 'css-loader'],
       },
       {
@@ -49,6 +48,8 @@ module.exports = {
   resolve: {
     alias: {
       tenbyten: local('src'),
+      // Prevent webpack from pulling in all of moment's locales
+      moment: 'moment/min/moment.min.js',
     },
   },
 }

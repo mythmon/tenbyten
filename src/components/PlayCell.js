@@ -2,7 +2,8 @@ import React, { Component, PropTypes as pt } from 'react'
 import moment from 'moment'
 import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
 import FaCommentingO from 'react-icons/lib/fa/commenting-o'
-import { Table } from 'semantic-ui-react'
+import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
+import 'semantic-ui-css/components/table.css'
 
 import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 

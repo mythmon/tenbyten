@@ -1,7 +1,8 @@
 import React, { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
 import { createSelector, createStructuredSelector } from 'reselect'
-import { Table } from 'semantic-ui-react'
+import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
+import 'semantic-ui-css/components/table.css'
 import moment from 'moment'
 
 import PlaysRow from 'tenbyten/components/PlaysRow'
