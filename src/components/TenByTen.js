@@ -2,6 +2,7 @@ import React, { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
 import { createSelector, createStructuredSelector } from 'reselect'
 import { Table } from 'semantic-ui-react'
+import moment from 'moment'
 
 import PlaysRow from 'tenbyten/components/PlaysRow'
 import NavFields from 'tenbyten/components/NavFields'
@@ -15,6 +16,8 @@ class TenByTen extends Component {
     ready: pt.bool.isRequired,
     listId: pt.number.isRequired,
     username: pt.string.isRequired,
+    startDate: pt.instanceOf(moment).isRequired,
+    endDate: pt.instanceOf(moment).isRequired,
     playsByItem: pt.object,
     geekList: pt.shape({
       items: pt.arrayOf(pt.shape({
@@ -25,7 +28,7 @@ class TenByTen extends Component {
   }
 
   render () {
-    const {ready, listId, username, playsByItem, geekList} = this.props
+    const {ready, listId, username, playsByItem, geekList, startDate, endDate} = this.props
 
     let content
 
@@ -58,7 +61,7 @@ class TenByTen extends Component {
 
     return (
       <div>
-        <QueryPlays username={username} />
+        <QueryPlays username={username} startDate={startDate} endDate={endDate} />
         <QueryGeekList listId={listId} />
         <NavFields defaultUsername={username} defaultListId={listId} />
         {content}
@@ -73,4 +76,6 @@ export default connect(createStructuredSelector({
   ready: createSelector([getGeekList], geekList => geekList !== null),
   username: (state, props) => props.params.username,
   listId: (state, props) => parseInt(props.params.listId),
+  startDate: (state, props) => moment(props.location.query.startDate, 'YYYY-MM-DD'),
+  endDate: (state, props) => moment(props.location.query.endDate, 'YYYY-MM-DD'),
 }))(TenByTen)

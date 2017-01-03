@@ -22,10 +22,15 @@ export function addPlayMany (plays) {
   }
 }
 
-export function requestPlayList (username, page = 1) {
+export function requestPlayList (username, startDate, endDate, page = 1) {
   return async dispatch => {
     const requestId = `playList/${username}`
-    const response = await dispatch(makeBGGRequest(requestId, '/xmlapi2/plays', {username, page}))
+    const response = await dispatch(makeBGGRequest(requestId, '/xmlapi2/plays', {
+      username,
+      page,
+      mindate: startDate.format('YYYY-MM-DD'),
+      maxdate: endDate.format('YYYY-MM-DD'),
+    }))
     const docString = await response.text()
 
     const parser = new DOMParser()

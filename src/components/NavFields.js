@@ -3,24 +3,30 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Form } from 'semantic-ui-react'
+import moment from 'moment'
+
+const DATE_FORMAT = 'YYYY-MM-DD'
 
 class NavFields extends Component {
   static propTypes = {
     defaultUsername: pt.string,
     defaultListId: pt.number,
+    defaultStartDate: pt.instanceOf(moment),
+    defaultEndDate: pt.instanceOf(moment),
     push: pt.func.isRequired,
-  }
-
-  static defaultProps = {
-    defaultUsername: null,
-    defaultListId: null,
   }
 
   constructor (props) {
     super(props)
+
+    const startDate = props.defaultStartDate || moment().startOf('year')
+    const endDate = props.defaultEndDate || moment().endOf('year')
+
     this.state = {
       name: props.defaultUsername || '',
       list: (props.defaultListId || '').toString(),
+      startDate: startDate.format(DATE_FORMAT),
+      endDate: endDate.format(DATE_FORMAT),
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -33,14 +39,16 @@ class NavFields extends Component {
     })
   }
 
-  navigate () {
-    const {name, list} = this.state
+  navigate (ev) {
+    ev.preventDefault()
+    const {name, list, startDate, endDate} = this.state
     console.log('nav to', `/table/${list}/${name}`)
-    this.props.push(`/table/${list}/${name}`)
+    this.props.push(`/table/${list}/${name}?startDate=${startDate}&endDate=${endDate}`)
+    return false
   }
 
   render () {
-    const {name, list} = this.state
+    const {name, list, startDate, endDate} = this.state
 
     return (
       <div>
@@ -48,19 +56,11 @@ class NavFields extends Component {
           <Form.Group inline>
             <Form.Input label='Username' name='name' value={name} onChange={this.handleChange} />
             <Form.Input label='Geeklist ID' name='list' value={list} onChange={this.handleChange} />
+            <Form.Input label='Start Date' name='startDate' value={startDate} onChange={this.handleChange} />
+            <Form.Input label='End Date' name='endDate' value={endDate} onChange={this.handleChange} />
             <Form.Button type='submit' size='mini'>Go</Form.Button>
           </Form.Group>
         </Form>
-      </div>
-    )
-
-    return (
-      <div>
-        <label>Username</label>
-        <input name='name' value={name} onChange={this.handleChange} />
-        <label>Geeklist ID</label>
-        <input name='list' value={list} onChange={this.handleChange} />
-        <button onClick={this.navigate}>Go</button>
       </div>
     )
   }
