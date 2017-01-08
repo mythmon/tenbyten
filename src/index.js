@@ -10,7 +10,7 @@ if (window.location.hash.indexOf('#/') === 0) {
 // Initialize the control app and render it.
 const app = createApp()
 
-document.ready = () => {
+document.onload = () => {
   let container = document.querySelector('#container')
   if (!container) {
     container = document.createElement('div')
