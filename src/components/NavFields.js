@@ -1,7 +1,6 @@
 import React, { Component, PropTypes as pt } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
 import moment from 'moment'
@@ -14,7 +13,6 @@ class NavFields extends Component {
     defaultListId: pt.number,
     defaultStartDate: pt.instanceOf(moment),
     defaultEndDate: pt.instanceOf(moment),
-    push: pt.func.isRequired,
   }
 
   constructor (props) {
@@ -43,9 +41,7 @@ class NavFields extends Component {
   navigate (ev) {
     ev.preventDefault()
     const {name, list, startDate, endDate} = this.state
-    console.log('nav to', `/table/${list}/${name}`)
-    this.props.push(`/table/${list}/${name}?startDate=${startDate}&endDate=${endDate}`)
-    return false
+    window.location = `/table/${list}/${name}?startDate=${startDate}&endDate=${endDate}`
   }
 
   render () {
@@ -68,5 +64,4 @@ class NavFields extends Component {
 }
 export default connect(
   (state, ownProps) => ownProps,
-  dispatch => bindActionCreators({push}, dispatch),
 )(NavFields)

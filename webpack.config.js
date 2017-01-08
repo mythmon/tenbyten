@@ -9,6 +9,7 @@ function local (p) {
 module.exports = {
   entry: {
     main: [
+      './src/404.js',
       'babel-polyfill',
       'normalize.css',
       'semantic-ui-css/semantic.css',
@@ -20,7 +21,14 @@ module.exports = {
   devtool: 'sourcemap',
 
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: '10x10',
+    }),
+    new HtmlWebpackPlugin({
+      title: '404',
+      filename: '404.html',
+      template: 'src/404.html',
+    }),
     // Only include english locale in moment
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
   ],
@@ -32,6 +40,7 @@ module.exports = {
   output: {
     path: local('build'),
     filename: '[name].js',
+    publicPath: '/',
   },
 
   module: {
@@ -55,6 +64,12 @@ module.exports = {
   resolve: {
     alias: {
       tenbyten: local('src'),
+    },
+  },
+
+  devServer: {
+    historyApiFallback: {
+      index: 'build/index.html',
     },
   },
 }

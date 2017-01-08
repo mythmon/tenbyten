@@ -1,68 +1,26 @@
 const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-function local (p) {
-  return path.resolve(__dirname, './' + p)
-}
+const baseConfig = require('./webpack.config.js')
 
-module.exports = {
-  entry: {
-    main: [
-      'babel-polyfill',
-      'normalize.css',
-      './src/style.css',
-      './src/index.js',
-    ],
+let config = Object.assign({}, baseConfig)
+
+// Enable React dev mode
+config.plugins.push(new webpack.DefinePlugin({
+  'process.env': {
+    'NODE_ENV': JSON.stringify('production'),
   },
+}))
 
-  devtool: 'sourcemap',
+// Put libraries in a separate bundle
+config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+  name: 'vendor',
+  minChunks: module => /node_modules/.test(module.resource),
+}))
 
-  plugins: [
-    new HtmlWebpackPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: module => /node_modules/.test(module.resource),
-    }),
-    // Only include english locale in moment
-    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
-  ],
+// include hashes in filenames
+config.output.filename = '[name]-[hash].js'
 
-  performance: {
-    hints: false,
-  },
+// no dev server
+delete config.devServer
 
-  output: {
-    path: local('build'),
-    filename: '[name]-[hash].js',
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        loader: 'file-loader',
-      },
-    ],
-  },
-
-  resolve: {
-    alias: {
-      tenbyten: local('src'),
-    },
-  },
-}
+module.exports = config

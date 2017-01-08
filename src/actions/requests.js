@@ -11,6 +11,8 @@ export function makeBGGRequest (requestId, endpoint, query = {}) {
       url.searchParams.set(key, query[key])
     }
 
+    dispatch(requestStart(requestId))
+
     try {
       const response = await fetch(url)
       if (response.state >= 400) {

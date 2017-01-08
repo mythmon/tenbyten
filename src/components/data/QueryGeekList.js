@@ -27,7 +27,6 @@ class QueryGeekList extends Component {
   request (props) {
     const { listId, requestState, requestGeekList } = props
     if (!requestState) {
-      console.log('making geekList request', requestState)
       requestGeekList(listId)
     }
   }

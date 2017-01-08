@@ -2,6 +2,11 @@ import ReactDOM from 'react-dom'
 
 import { createApp } from 'tenbyten/app.js'
 
+if (window.location.hash.indexOf('#/') === 0) {
+  const pathname = window.location.hash.slice(1)
+  window.location = pathname
+}
+
 // Initialize the control app and render it.
 const app = createApp()
 

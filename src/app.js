@@ -1,20 +1,19 @@
 import React, { PropTypes as pt } from 'react'
 import { Provider } from 'react-redux'
-import { Router, hashHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { RouterProvider } from 'redux-little-router'
 
 import { configureStore } from 'tenbyten/store'
-import Routes from 'tenbyten/routes'
+import App from 'tenbyten/components/App'
 
 /**
  * Root Component for the entire app.
  */
-export function Root ({ store, history }) {
+export function Root ({ store }) {
   return (
     <Provider store={store}>
-      <Router history={history}>
-        {Routes}
-      </Router>
+      <RouterProvider store={store}>
+        <App />
+      </RouterProvider>
     </Provider>
   )
 }
@@ -28,11 +27,9 @@ Root.propTypes = {
  */
 export function createApp () {
   const store = configureStore()
-  const history = syncHistoryWithStore(hashHistory, store)
 
   return {
     store,
-    history,
     rootComponent: (<Root store={store} history={history} />),
   }
 }

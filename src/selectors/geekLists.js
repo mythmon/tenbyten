@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import { getItems } from 'tenbyten/selectors/items'
 
-export const getCurrentGeekListId = (state, props) => props.params.listId
+export const getCurrentGeekListId = state => state.router.params.listId
 
 export const getAllGeekLists = state => state.geekLists
 

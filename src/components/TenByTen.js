@@ -75,8 +75,8 @@ export default connect(createStructuredSelector({
   playsByItem: getPlaysByItem,
   geekList: getGeekList,
   ready: createSelector([getGeekList], geekList => geekList !== null),
-  username: (state, props) => props.params.username,
-  listId: (state, props) => parseInt(props.params.listId),
-  startDate: (state, props) => moment(props.location.query.startDate, 'YYYY-MM-DD'),
-  endDate: (state, props) => moment(props.location.query.endDate, 'YYYY-MM-DD'),
+  username: state => state.router.params.username,
+  listId: state => parseInt(state.router.params.listId),
+  startDate: state => moment(state.router.query.startDate, 'YYYY-MM-DD'),
+  endDate: state => moment(state.router.query.endDate, 'YYYY-MM-DD'),
 }))(TenByTen)

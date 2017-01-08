@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-export const getCurrentUser = (state, props) => props.params.username
+export const getCurrentUser = state => state.router.params.username
 
 export const getAllPlays = state => (
   Object.values(state.plays)
