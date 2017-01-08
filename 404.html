@@ -1,5 +1,8 @@
 <script>
-  sessionStorage.redirect = location.href;
+  sessionStorage.redirect = location.href
+  const onGithub = window.location.hostname.indexOf('github.io') !== -1
+  const nextUrl = onGithub ? '/tenbyten/' : '/'
+  console.log('on 404.html: redirecting to', nextUrl)
+  window.location = nextUrl;
 </script>
-<meta http-equiv="refresh" content="0;URL='/tenbyten'"></meta>
-<script type="text/javascript" src="/tenbyten/vendor-7afe2746e1897a8b8abb.js"></script><script type="text/javascript" src="/tenbyten/main-7afe2746e1897a8b8abb.js"></script>
+<script type="text/javascript" src="/tenbyten/vendor-a2f5df6eac093eb3dd74.js"></script><script type="text/javascript" src="/tenbyten/main-a2f5df6eac093eb3dd74.js"></script>
