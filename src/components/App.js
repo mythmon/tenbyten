@@ -14,7 +14,10 @@ export default class App extends Component {
         <div className='wrapper'>
           <Header />
           <div className='content'>
-            <Fragment forRoute='/' withConditions={l => l.pathname === '/'}>
+            <Fragment
+              forRoute='/'
+              withConditions={l => l.pathname === '/' || l.pathname === '/tenbyten/'}
+            >
               <Home />
             </Fragment>
             <Fragment forRoute='/table/:listId/:username'>
