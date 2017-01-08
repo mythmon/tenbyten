@@ -23,6 +23,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: '10x10',
+      template: 'src/index.ejs',
     }),
     new HtmlWebpackPlugin({
       title: '404',
@@ -69,7 +70,7 @@ module.exports = {
 
   devServer: {
     historyApiFallback: {
-      index: 'build/index.html',
+      index: 'build/404.html',
     },
   },
 }

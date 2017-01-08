@@ -1,4 +1,7 @@
 <script>
-  sessionStorage.redirect = location.href;
+  sessionStorage.redirect = location.href
+  const onGithub = window.location.hostname.indexOf('github.io') !== -1
+  const nextUrl = onGithub ? '/tenbyten/' : '/'
+  console.log('on 404.html: redirecting to', nextUrl)
+  window.location = nextUrl;
 </script>
-<meta http-equiv="refresh" content="0;URL='/tenbyten'"></meta>

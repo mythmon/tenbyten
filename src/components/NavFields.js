@@ -1,5 +1,4 @@
 import React, { Component, PropTypes as pt } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
