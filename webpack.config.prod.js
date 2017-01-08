@@ -17,8 +17,10 @@ config.plugins.push(new webpack.optimize.CommonsChunkPlugin({
   minChunks: module => /node_modules/.test(module.resource),
 }))
 
-// include hashes in filenames
+// Include hashes in filenames
 config.output.filename = '[name]-[hash].js'
+// For github pages deployments. Can this be avoided?
+config.output.publicPath = '/tenbyten'
 
 // no dev server
 delete config.devServer
