@@ -11,7 +11,7 @@ const onGithub = window.location.hostname.indexOf('github.io') !== -1
 console.log('onGithub', onGithub)
 const { routerEnhancer, routerMiddleware } = routerForBrowser({
   routes,
-  basename: onGithub ? '/tenbyten' : '/',
+  basename: onGithub ? '/tenbyten' : undefined,
 })
 
 const logger = createLogger({
@@ -40,6 +40,9 @@ const enhancer = compose(
 export function configureStore (initialState) {
   const store = createStore(reducers, initialState, enhancer)
   const initialLocation = store.getState().router
+  store.dispatch(initializeCurrentLocation({
+    pathname: 'fakepathname',
+  }))
   store.dispatch(initializeCurrentLocation(initialLocation))
   return store
 }

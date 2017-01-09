@@ -42,7 +42,7 @@ class NavFields extends Component {
     const {name, list, startDate, endDate} = this.state
 
     const onGithub = window.location.hostname.indexOf('github.io') !== -1
-    let newUrl = `/table/${list}/${name}?startDate=${startDate}&endDate=${endDate}`
+    let newUrl = `/table/${list}/${name}/?startDate=${startDate}&endDate=${endDate}`
     if (onGithub) {
       newUrl = '/tenbyten' + newUrl
     }
