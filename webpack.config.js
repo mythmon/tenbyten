@@ -70,7 +70,7 @@ module.exports = {
 
   devServer: {
     historyApiFallback: {
-      index: 'build/index.html',
+      index: 'src/404.html',
     },
   },
 }

@@ -1,7 +1,12 @@
 import { compose, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
-import { routerForBrowser, initializeCurrentLocation } from 'redux-little-router'
+import {
+  routerForBrowser,
+  initializeCurrentLocation,
+  LOCATION_CHANGED,
+  createMatcher,
+} from 'redux-little-router'
 
 import reducers from 'tenbyten/reducers'
 import routes from 'tenbyten/routes'
@@ -28,9 +33,29 @@ const logger = createLogger({
   },
 })
 
+const fixRouterActionsMiddleware = store => next => action => {
+  if (action.type !== LOCATION_CHANGED) {
+    return next(action)
+  }
+
+  const newAction = { ...action }
+  const payload = newAction.payload
+  if (payload.pathname.startsWith(payload.basename)) {
+    const length = payload.basename.length
+    payload.pathname = payload.pathname.slice(length)
+    const match = createMatcher(routes)(payload.pathname)
+    if (match) {
+      newAction.payload = { ...payload, ...match }
+    }
+  }
+
+  return next(newAction)
+}
+
 const enhancer = compose(
   routerEnhancer,
   applyMiddleware(
+    fixRouterActionsMiddleware,
     routerMiddleware,
     thunk,
     logger,

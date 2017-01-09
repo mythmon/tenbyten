@@ -1,5 +1,5 @@
 import React from 'react'
-import { RelativeFragment as Fragment, Link } from 'redux-little-router'
+import { RelativeFragment as Fragment } from 'redux-little-router'
 
 import TenByTen from 'tenbyten/components/TenByTen'
 import Home from 'tenbyten/components/Home'
