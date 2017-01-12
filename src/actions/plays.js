@@ -2,8 +2,10 @@ import moment from 'moment'
 import yaml from 'js-yaml'
 
 import { updateItemMany } from 'tenbyten/actions/items'
+import { updatePlayerMany } from 'tenbyten/actions/players'
 import { toast } from 'tenbyten/actions/toast'
 import { makeBGGRequest } from 'tenbyten/actions/requests'
+import nextId from 'tenbyten/utils/nextId'
 
 export const ADD_PLAY = 'ADD_PLAY'
 export const ADD_PLAY_MANY = 'ADD_PLAY_MANY'
@@ -50,8 +52,9 @@ export function requestPlayList (username, startDate, endDate, page = 1) {
     }
 
     const creator = plays.getAttribute('username')
-    const playsObjs = []
-    const itemsObjs = []
+    const playObjs = []
+    const itemObjs = new Set()
+    const playerObjs = new Set()
 
     for (let play of plays.querySelectorAll('play')) {
       const item = play.querySelector('item')
@@ -68,6 +71,7 @@ export function requestPlayList (username, startDate, endDate, page = 1) {
         comments: comments ? comments.textContent : null,
         commentsParsed: null,
         length: parseInt(play.getAttribute('length')),
+        players: [],
       }
 
       if (playObj.comments && playObj.comments !== '') {
@@ -84,11 +88,42 @@ export function requestPlayList (username, startDate, endDate, page = 1) {
         playObj.length = null
       }
 
-      itemsObjs.push(itemObj)
-      playsObjs.push(playObj)
+      const players = Array.from(play.querySelector('players').querySelectorAll('player'))
+      for (const player of players) {
+        // shared player obj
+        let playerObj = {
+          id: player.getAttribute('userid'),
+          username: player.getAttribute('username'),
+          name: player.getAttribute('name'),
+        }
+        if (playerObj.id === '0') {
+          if (playerObj.username) {
+            playerObj.id = `ext-username-${playerObj.username}`
+          } else if (playerObj.name) {
+            playerObj.id = `ext-name-${playerObj.name}`
+          } else {
+            playerObj.id = `ext-anon-${nextId()}`
+          }
+        }
+
+        playerObjs.add(playerObj)
+        // local version of the player
+        playObj.players.push({
+          id: playerObj.id,
+          startPosition: player.getAttribute('startPosition'),
+          color: player.getAttribute('color'),
+          score: parseFloat(player.getAttribute('score')),
+          newPlayer: player.getAttribute('new') === '1',
+          win: player.getAttribute('win') === '1',
+        })
+      }
+
+      itemObjs.add(itemObj)
+      playObjs.push(playObj)
     }
 
-    dispatch(updateItemMany(itemsObjs))
-    dispatch(addPlayMany(playsObjs))
+    dispatch(updateItemMany(Array.from(itemObjs)))
+    dispatch(updatePlayerMany(Array.from(playerObjs)))
+    dispatch(addPlayMany(Array.from(playObjs)))
   }
 }

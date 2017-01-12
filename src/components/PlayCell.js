@@ -4,6 +4,7 @@ import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
 import FaCommentingO from 'react-icons/lib/fa/commenting-o'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
+import yaml from 'js-yaml'
 
 import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 
@@ -47,7 +48,7 @@ export default class ItemPlaysRow extends Component {
 
       if (Object.keys(commentsParsed).length > 0) {
         icons.push(
-          <span name='extra' key='extra' title={JSON.stringify(commentsParsed, null, 2)}>
+          <span name='extra' key='extra' title={yaml.safeDump(commentsParsed)}>
             <FaQuestionCircle />
           </span>
         )

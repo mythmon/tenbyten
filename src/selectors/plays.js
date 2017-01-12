@@ -10,13 +10,13 @@ export const getAllPlays = state => (
   }))
 )
 
-export const getPlays = createSelector(
+export const getCurrentPlays = createSelector(
   [getCurrentUser, getAllPlays],
   (currentUser, allPlays) => allPlays.filter(play => play.creator === currentUser)
 )
 
 export const getPlaysByItem = createSelector(
-  [getPlays],
+  [getCurrentPlays],
   plays => {
     const playsByItem = {}
     for (const play of plays) {

@@ -71,3 +71,13 @@
 .icon-set > * {
   width: 16px;
 }
+
+.ui.label.player-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 5px 5px 7px;
+}
+
+.ui.label.player-label > .detail {
+  margin-left: 5px;
+}

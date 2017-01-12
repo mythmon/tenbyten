@@ -1,11 +1,6 @@
-export const TOAST_SHOW = 'TOAST_SHOW'
+import nextId from 'tenbyten/utils/nextId'
 
-const nextId = () => {
-  let _id = 1
-  return () => {
-    return _id++
-  }
-}
+export const TOAST_SHOW = 'TOAST_SHOW'
 
 export function toast (level, message) {
   return {

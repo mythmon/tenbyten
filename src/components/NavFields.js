@@ -40,7 +40,6 @@ class NavFields extends Component {
   navigate (ev) {
     ev.preventDefault()
     const {name, list, startDate, endDate} = this.state
-
     const onGithub = window.location.hostname.indexOf('github.io') !== -1
     let newUrl = `/table/${list}/${name}/?startDate=${startDate}&endDate=${endDate}`
     if (onGithub) {
