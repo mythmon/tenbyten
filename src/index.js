@@ -4,7 +4,12 @@ import { createApp } from 'tenbyten/app.js'
 
 if (window.location.hash.indexOf('#/') === 0) {
   console.log('Redirecting hash URL to HTML5 URL', window.location, window.location.hash)
-  window.location = window.location.hash.slice(1)
+  let newLocation = window.location.hash.slice(1)
+  const onGithub = window.location.hostname.indexOf('github.io') !== -1
+  if (onGithub) {
+    newLocation = '/tenbyten' + newLocation
+  }
+  window.location = newLocation
 }
 
 // Initialize the control app and render it.
