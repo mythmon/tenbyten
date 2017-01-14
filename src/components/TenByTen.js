@@ -8,6 +8,7 @@ import QueryPlays from 'tenbyten/components/data/QueryPlays'
 import QueryGeekList from 'tenbyten/components/data/QueryGeekList'
 import PlaysTable from 'tenbyten/components/PlaysTable'
 import PlayersList from 'tenbyten/components/PlayersList'
+import ChallengeProgress from 'tenbyten/components/ChallengeProgress'
 
 class TenByTen extends Component {
   static propTypes = {
@@ -26,7 +27,14 @@ class TenByTen extends Component {
         <QueryGeekList listId={listId} />
 
         <NavFields defaultUsername={username} defaultListId={listId} />
-        <PlayersList />
+        <div className='row'>
+          <div className='row-item collapse'>
+            <PlayersList />
+          </div>
+          <div className='row-item'>
+            <ChallengeProgress />
+          </div>
+        </div>
         <PlaysTable />
       </div>
     )

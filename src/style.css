@@ -72,6 +72,10 @@
   width: 16px;
 }
 
+.players-list {
+  display: flex;
+}
+
 .ui.label.player-label {
   display: inline-flex;
   align-items: center;
@@ -80,4 +84,21 @@
 
 .ui.label.player-label > .detail {
   margin-left: 5px;
+}
+
+
+.row {
+  display: flex;
+}
+
+.row-item {
+  flex: 1 1;
+}
+
+.row-item.collapse {
+  flex: 0 1;
+}
+
+.row-item:not(:last-child) {
+  margin-right: 10px;
 }

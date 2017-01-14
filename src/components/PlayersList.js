@@ -18,7 +18,7 @@ class PlaysTable extends Component {
     const { players } = this.props
 
     return (
-      <div>
+      <div className='players-list'>
         {players.map(player => <PlayerLabel player={player} key={player.id} />)}
       </div>
     )
