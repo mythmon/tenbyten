@@ -45,7 +45,7 @@ export default class ItemPlaysRow extends Component {
     let averagePlayTime = null
     const playTimes = plays.map(play => play.length).filter(a => a > 0)
     if (playTimes.length > 0) {
-      averagePlayTime = playTimes.reduce((a, b) => a + b, 0) / playTimes.length
+      averagePlayTime = Math.round(playTimes.reduce((a, b) => a + b, 0) / playTimes.length)
     }
 
     return (
