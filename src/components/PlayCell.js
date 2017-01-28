@@ -5,9 +5,13 @@ import FaCommentingO from 'react-icons/lib/fa/commenting-o'
 import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
+import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
+import 'semantic-ui-css/components/label.css'
 import yaml from 'js-yaml'
 
 import weedIcon from 'tenbyten/imgs/icon_weed.svg'
+import PlayerIcon from 'tenbyten/components/PlayerIcon'
+import * as playerUtils from 'tenbyten/utils/players'
 
 export default class ItemPlaysRow extends Component {
   static propTypes = {
@@ -38,6 +42,30 @@ export default class ItemPlaysRow extends Component {
       if ('score' in commentsParsed) {
         info.push(<div name='score' key='score'>{commentsParsed.score} points</div>)
         delete commentsParsed.score
+      } else {
+        const playersByScore = play.players.filter(player => typeof player.score === 'number')
+        playersByScore.sort((a, b) => b.score - a.score)
+        if (playersByScore.length) {
+          info.push(
+            <div name='score' key='score'>
+              {playersByScore.map((player, idx) => (
+                <Label
+                  key={`player-score-${player.id}-${idx}`}
+                  basic
+                  color={playerUtils.color(player)}
+                  className='score-label'
+                >
+                  <span className='points'>
+                    {Math.round(player.score)} pts
+                  </span>
+                  <Label.Detail>
+                    <PlayerIcon player={player} />
+                  </Label.Detail>
+                </Label>
+              ))}
+            </div>
+          )
+        }
       }
 
       if ('state' in commentsParsed) {

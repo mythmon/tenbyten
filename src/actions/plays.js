@@ -111,15 +111,19 @@ export function requestPlayList (username, startDate, endDate, page = 1) {
         }
 
         playerObjs.add(playerObj)
-        // local version of the player
-        playObj.players.push({
+
+        const localPlayer = {
           id: playerObj.id,
           startPosition: player.getAttribute('startPosition'),
           color: player.getAttribute('color'),
           score: parseFloat(player.getAttribute('score')),
           newPlayer: player.getAttribute('new') === '1',
           win: player.getAttribute('win') === '1',
-        })
+        }
+        if (isNaN(localPlayer.score)) {
+          localPlayer.score = null
+        }
+        playObj.players.push(localPlayer)
       }
 
       itemObjs.add(itemObj)

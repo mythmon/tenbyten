@@ -31,8 +31,6 @@ class PlaysTable extends Component {
       color = 'grey'
     }
 
-    console.log(progress, timeElapsed, color)
-
     return (
       <div>
         <Progress percent={progress * 100} precision={0} color={color}>

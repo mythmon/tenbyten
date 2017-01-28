@@ -49,8 +49,8 @@ export default class ItemPlaysRow extends Component {
     }
 
     return (
-      <Table.Row>
-        <Table.Cell>
+      <Table.Row className='plays-row'>
+        <Table.Cell className='plays-row-header'>
           <header>
             {item.name}
           </header>

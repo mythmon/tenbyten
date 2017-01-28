@@ -54,12 +54,19 @@
   }
 }
 
+.plays-row-header header {
+  font-weight: bold;
+}
+
 .play-cell {
   display: flex;
 }
 
 .info-set {
   flex: 1 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .icon-set {
@@ -86,6 +93,24 @@
   margin-left: 5px;
 }
 
+.ui.label.score-label {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3px 3px 3px 6px;
+  margin: 1px;
+  min-width: 65px;
+}
+
+.ui.label.score-label > .points {
+  flex: 1 1 100%;
+  text-align: right;
+}
+
+.ui.label.score-label > .detail {
+  flex: 0 1;
+  margin-left: 5px;
+}
 
 .row {
   display: flex;

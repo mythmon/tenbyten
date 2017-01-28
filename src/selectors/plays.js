@@ -7,6 +7,7 @@ export const getAllPlays = state => (
   .map(play => ({
     ...play,
     item: state.items[play.item],
+    players: play.players.map(player => ({ ...state.players[player.id], ...player })),
   }))
 )
 
