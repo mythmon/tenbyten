@@ -2,6 +2,7 @@ import React, { Component, PropTypes as pt } from 'react'
 import moment from 'moment'
 import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
 import FaCommentingO from 'react-icons/lib/fa/commenting-o'
+import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 import yaml from 'js-yaml'
@@ -57,6 +58,14 @@ export default class ItemPlaysRow extends Component {
       icons.push(
         <span name='comments' key='comments' title={play.comments}>
           <FaCommentingO />
+        </span>
+      )
+    }
+
+    if (play.players.length === 0) {
+      icons.push(
+        <span name='warning-players' key='warning-players' title='No players recorded'>
+          <FaExclamationTriangle />
         </span>
       )
     }

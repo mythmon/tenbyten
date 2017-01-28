@@ -88,7 +88,11 @@ export function requestPlayList (username, startDate, endDate, page = 1) {
         playObj.length = null
       }
 
-      const players = Array.from(play.querySelector('players').querySelectorAll('player'))
+      let players = []
+      let playersEl = play.querySelector('players')
+      if (playersEl) {
+        players = Array.from(playersEl.querySelectorAll('player'))
+      }
       for (const player of players) {
         // shared player obj
         let playerObj = {
