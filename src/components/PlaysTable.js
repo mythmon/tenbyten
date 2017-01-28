@@ -31,6 +31,13 @@ class PlaysTable extends Component {
     for (let i = 1; i < 11; i++) {
       headers.push(<Table.HeaderCell key={`header-${i}`}>{i}</Table.HeaderCell>)
     }
+
+    const sortedGeekListItems = [ ...geekList.items ].sort((a, b) => {
+      let alen = (playsByItem[a.id] || []).length
+      let blen = (playsByItem[b.id] || []).length
+      return blen - alen
+    })
+
     return (
       <Table fixed celled className='ten-by-ten'>
         <Table.Header>
@@ -39,7 +46,7 @@ class PlaysTable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {geekList.items.map(item => (
+          {sortedGeekListItems.map(item => (
             <PlaysRow
               key={`playrow-${item.id}`}
               item={item}
