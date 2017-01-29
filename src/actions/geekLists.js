@@ -6,7 +6,7 @@ export const ADD_GEEK_LIST = 'ADD_GEEK_LIST'
 export function addGeekList (geekList) {
   return {
     type: ADD_GEEK_LIST,
-    geekList,
+    item: geekList,
   }
 }
 

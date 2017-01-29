@@ -13,14 +13,14 @@ export const ADD_PLAY_MANY = 'ADD_PLAY_MANY'
 export function addPlay (play) {
   return {
     type: ADD_PLAY,
-    play,
+    item: play,
   }
 }
 
 export function addPlayMany (plays) {
   return {
     type: ADD_PLAY_MANY,
-    plays,
+    items: plays,
   }
 }
 

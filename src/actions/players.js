@@ -4,13 +4,13 @@ export const UPDATE_PLAYER_MANY = 'UPDATE_PLAYER_MANY'
 export function updatePlayer (player) {
   return {
     type: UPDATE_PLAYER,
-    player,
+    item: player,
   }
 }
 
 export function updatePlayerMany (players) {
   return {
     type: UPDATE_PLAYER_MANY,
-    players,
+    items: players,
   }
 }
