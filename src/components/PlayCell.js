@@ -8,6 +8,7 @@ import 'semantic-ui-css/components/table.css'
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
 import 'semantic-ui-css/components/label.css'
 import yaml from 'js-yaml'
+import _ from 'lodash'
 
 import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 import PlayerIcon from 'tenbyten/components/PlayerIcon'
@@ -50,30 +51,35 @@ export default class ItemPlaysRow extends Component {
     if ('score' in commentsParsed) {
       info.push(<div name='score' key='score'>{commentsParsed.score} points</div>)
       delete commentsParsed.score
-    } else {
-      const playersByScore = play.players.filter(player => typeof player.score === 'number')
-      playersByScore.sort((a, b) => b.score - a.score)
-      if (playersByScore.length) {
-        info.push(
-          <div name='score' key='score'>
-            {playersByScore.map((player, idx) => (
-              <Label
-                key={`player-score-${player.id}-${idx}`}
-                basic
-                color={playerUtils.color(player)}
-                className='score-label'
-              >
-                <span className='points'>
-                  {Math.round(player.score)} pts
-                </span>
-                <Label.Detail>
-                  <PlayerIcon player={player} />
-                </Label.Detail>
-              </Label>
-            ))}
-          </div>
-        )
-      }
+    }
+
+    if (play.players.length) {
+      const [withScore, withoutScore] =
+        _.partition(play.players, player => typeof player.score === 'number')
+      withScore.sort((a, b) => b.score - a.score)
+
+      info.push(
+        <div name='players' key='players'>
+          {withScore.map((player, idx) => (
+            <Label
+              key={`player-score-${player.id}-${idx}`}
+              basic
+              color={playerUtils.color(player)}
+              className='score-label'
+            >
+              <span className='points'>
+                {Math.round(player.score)} pts
+              </span>
+              <Label.Detail>
+                <PlayerIcon player={player} />
+              </Label.Detail>
+            </Label>
+          ))}
+          {withoutScore.map((player, idx) => (
+            <PlayerIcon key={`player-noscore-${player.id}-${idx}`} player={player} />
+          ))}
+        </div>
+      )
     }
 
     if ('state' in commentsParsed) {
@@ -101,6 +107,7 @@ export default class ItemPlaysRow extends Component {
 
     return (
       <Table.Cell>
+        <script type='application/json' dangerouslySetInnerHTML={{__html: JSON.stringify(play)}} />
         <div className='play-cell'>
           <div className='info-set'>
             {info}
