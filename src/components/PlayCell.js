@@ -36,56 +36,57 @@ export default class ItemPlaysRow extends Component {
 
     info.push(<div name='date' key='date'>{play.date.format('MMM Do')}</div>)
 
+    let commentsParsed = {}
     if (play.commentsParsed) {
-      let commentsParsed = {...play.commentsParsed}
-
-      if ('score' in commentsParsed) {
-        info.push(<div name='score' key='score'>{commentsParsed.score} points</div>)
-        delete commentsParsed.score
-      } else {
-        const playersByScore = play.players.filter(player => typeof player.score === 'number')
-        playersByScore.sort((a, b) => b.score - a.score)
-        if (playersByScore.length) {
-          info.push(
-            <div name='score' key='score'>
-              {playersByScore.map((player, idx) => (
-                <Label
-                  key={`player-score-${player.id}-${idx}`}
-                  basic
-                  color={playerUtils.color(player)}
-                  className='score-label'
-                >
-                  <span className='points'>
-                    {Math.round(player.score)} pts
-                  </span>
-                  <Label.Detail>
-                    <PlayerIcon player={player} />
-                  </Label.Detail>
-                </Label>
-              ))}
-            </div>
-          )
-        }
-      }
-
-      if ('state' in commentsParsed) {
-        if (commentsParsed.state === 'high') {
-          icons.push(<img name='state-high' key='state-high' src={weedIcon} title='State: High' />)
-          delete commentsParsed.state
-        }
-      }
-
-      if (Object.keys(commentsParsed).length > 0) {
-        icons.push(
-          <span name='extra' key='extra' title={yaml.safeDump(commentsParsed)}>
-            <FaQuestionCircle />
-          </span>
-        )
-      }
+      commentsParsed = {...play.commentsParsed}
     } else if (play.comments && play.comments.trim() !== '') {
       icons.push(
         <span name='comments' key='comments' title={play.comments}>
           <FaCommentingO />
+        </span>
+      )
+    }
+
+    if ('score' in commentsParsed) {
+      info.push(<div name='score' key='score'>{commentsParsed.score} points</div>)
+      delete commentsParsed.score
+    } else {
+      const playersByScore = play.players.filter(player => typeof player.score === 'number')
+      playersByScore.sort((a, b) => b.score - a.score)
+      if (playersByScore.length) {
+        info.push(
+          <div name='score' key='score'>
+            {playersByScore.map((player, idx) => (
+              <Label
+                key={`player-score-${player.id}-${idx}`}
+                basic
+                color={playerUtils.color(player)}
+                className='score-label'
+              >
+                <span className='points'>
+                  {Math.round(player.score)} pts
+                </span>
+                <Label.Detail>
+                  <PlayerIcon player={player} />
+                </Label.Detail>
+              </Label>
+            ))}
+          </div>
+        )
+      }
+    }
+
+    if ('state' in commentsParsed) {
+      if (commentsParsed.state === 'high') {
+        icons.push(<img name='state-high' key='state-high' src={weedIcon} title='State: High' />)
+        delete commentsParsed.state
+      }
+    }
+
+    if (Object.keys(commentsParsed).length > 0) {
+      icons.push(
+        <span name='extra' key='extra' title={yaml.safeDump(commentsParsed)}>
+          <FaQuestionCircle />
         </span>
       )
     }
