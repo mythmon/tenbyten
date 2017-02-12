@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect'
 
+import { getCurrentGeekList } from 'tenbyten/selectors/geekLists'
+
 export const getCurrentUser = state => state.router.params.username
 
 export const getAllPlays = state => (
@@ -12,8 +14,17 @@ export const getAllPlays = state => (
 )
 
 export const getCurrentPlays = createSelector(
-  [getCurrentUser, getAllPlays],
-  (currentUser, allPlays) => allPlays.filter(play => play.creator === currentUser)
+  [getCurrentUser, getAllPlays, getCurrentGeekList],
+  (currentUser, allPlays, currentGeekList) => {
+    let plays = allPlays.filter(play => play.creator === currentUser)
+
+    if (currentGeekList) {
+      const listItemIds = new Set(currentGeekList.items.map(item => item.id))
+      plays = plays.filter(play => listItemIds.has(play.item.id))
+    }
+
+    return plays
+  }
 )
 
 export const getPlaysByItem = createSelector(

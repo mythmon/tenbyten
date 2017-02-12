@@ -6,7 +6,7 @@ export const getCurrentGeekListId = state => state.router.params.listId
 
 export const getAllGeekLists = state => state.geekLists
 
-export const getGeekList = createSelector(
+export const getCurrentGeekList = createSelector(
   [getCurrentGeekListId, getAllGeekLists, getAllItems],
   (geekListId, allGeekLists, allItems) => {
     if (!(geekListId in allGeekLists)) {

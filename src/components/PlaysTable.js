@@ -5,7 +5,7 @@ import 'semantic-ui-css/components/table.css'
 import { createStructuredSelector } from 'reselect'
 
 import { getPlaysByItem } from 'tenbyten/selectors/plays'
-import { getGeekList } from 'tenbyten/selectors/geekLists'
+import { getCurrentGeekList } from 'tenbyten/selectors/geekLists'
 
 import PlaysRow from 'tenbyten/components/PlaysRow'
 
@@ -61,5 +61,5 @@ class PlaysTable extends Component {
 
 export default connect(createStructuredSelector({
   playsByItem: getPlaysByItem,
-  geekList: getGeekList,
+  geekList: getCurrentGeekList,
 }))(PlaysTable)
