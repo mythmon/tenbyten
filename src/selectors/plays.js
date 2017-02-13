@@ -36,7 +36,7 @@ export const getPlaysByItem = createSelector(
       if (!(key in playsByItem)) {
         playsByItem[key] = []
       }
-      playsByItem[key] = playsByItem[key].concat(play)
+      playsByItem[key].push(play)
     }
     return playsByItem
   }

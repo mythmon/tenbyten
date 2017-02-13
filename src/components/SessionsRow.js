@@ -1,48 +1,43 @@
 import React, { Component, PropTypes as pt } from 'react'
-import moment from 'moment'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 
-import PlayCell from 'tenbyten/components/PlayCell'
+import SessionCell from 'tenbyten/components/SessionCell'
 
-export default class ItemPlaysRow extends Component {
+export default class SessionsRow extends Component {
   static propTypes = {
     item: pt.shape({
       id: pt.number.isRequired,
       name: pt.string.isRequired,
     }),
-    plays: pt.arrayOf(pt.shape({
-      id: pt.number.isRequired,
-      date: pt.instanceOf(moment).isRequired,
-      comments: pt.string,
-      commentsParsed: pt.object,
-    })).isRequired,
-    maxPlays: pt.number,
+    sessions: pt.array.isRequired,
+    maxSessions: pt.number,
     showOverflow: pt.bool,
   }
 
   static defaultProps = {
-    maxPlays: 10,
+    maxSessions: 10,
     showOverflow: true,
   }
 
   render () {
-    const {item, plays, maxPlays} = this.props
+    const {item, sessions, maxSessions} = this.props
 
-    const playCells = []
-    for (let play of plays.slice(0, maxPlays)) {
-      playCells.push(
-        <PlayCell key={`play-cell-${play.id}`} play={play} />
+    const sessionCells = []
+    for (let session of sessions.slice(0, maxSessions)) {
+      sessionCells.push(
+        <SessionCell key={`${session.date}-${session.item.id}`} session={session} />
       )
     }
 
-    while (playCells.length < maxPlays) {
-      playCells.push(
-        <Table.Cell key={`empty-play-${playCells.length}`} />
+    while (sessionCells.length < maxSessions) {
+      sessionCells.push(
+        <Table.Cell key={`empty-play-${sessionCells.length}`} />
       )
     }
 
     let averagePlayTime = null
+    const plays = sessions.map(session => session.plays).reduce((a, b) => a.concat(b), [])
     const playTimes = plays.map(play => play.length).filter(a => a > 0)
     if (playTimes.length > 0) {
       averagePlayTime = Math.round(playTimes.reduce((a, b) => a + b, 0) / playTimes.length)
@@ -60,7 +55,7 @@ export default class ItemPlaysRow extends Component {
             </div>
           }
         </Table.Cell>
-        {playCells}
+        {sessionCells}
         <script type='application/json' dangerouslySetInnerHTML={{__html: JSON.stringify(this.props)}} />
       </Table.Row>
     )

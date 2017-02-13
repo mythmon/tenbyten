@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { getCurrentPlayers } from 'tenbyten/selectors/players'
 import PlayerLabel from 'tenbyten/components/PlayerLabel'
 
-class PlaysTable extends Component {
+class SessionsTable extends Component {
   static propTypes = {
     players: pt.arrayOf(pt.shape({
       id: pt.string.isRequired,
@@ -27,4 +27,4 @@ class PlaysTable extends Component {
 
 export default connect(createStructuredSelector({
   players: getCurrentPlayers,
-}))(PlaysTable)
+}))(SessionsTable)

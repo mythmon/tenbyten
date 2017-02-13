@@ -6,7 +6,7 @@ import moment from 'moment'
 import NavFields from 'tenbyten/components/NavFields'
 import QueryPlays from 'tenbyten/components/data/QueryPlays'
 import QueryGeekList from 'tenbyten/components/data/QueryGeekList'
-import PlaysTable from 'tenbyten/components/PlaysTable'
+import SessionsTable from 'tenbyten/components/SessionsTable'
 import PlayersList from 'tenbyten/components/PlayersList'
 import ChallengeProgress from 'tenbyten/components/ChallengeProgress'
 
@@ -35,7 +35,7 @@ class TenByTen extends Component {
             <ChallengeProgress />
           </div>
         </div>
-        <PlaysTable />
+        <SessionsTable />
       </div>
     )
   }

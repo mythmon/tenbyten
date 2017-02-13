@@ -4,31 +4,27 @@ import { createStructuredSelector } from 'reselect'
 import moment from 'moment'
 import Progress from 'semantic-ui-react/dist/commonjs/modules/Progress/Progress'
 import 'semantic-ui-css/components/progress.css'
-import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
-import 'semantic-ui-css/components/label.css'
 
-import { getCurrentPlays } from 'tenbyten/selectors/plays'
+import { getCurrentSessions } from 'tenbyten/selectors/sessions'
 
-class PlaysTable extends Component {
+class SessionsTable extends Component {
   static propTypes = {
-    plays: pt.array.isRequired,
+    sessions: pt.array.isRequired,
     startDate: pt.instanceOf(moment).isRequired,
     endDate: pt.instanceOf(moment).isRequired,
   }
 
   render () {
-    const { plays, startDate, endDate } = this.props
+    const { sessions, startDate, endDate } = this.props
 
     const timeElapsed = moment().diff(startDate) / endDate.diff(startDate)
-    const progress = plays.length / 100
+    const progress = sessions.length / 100
 
     let color
-    if (progress > timeElapsed + 0.01) {
-      color = 'green'
-    } else if (progress < timeElapsed - 0.01) {
+    if (progress < timeElapsed - 0.01) {
       color = 'red'
     } else {
-      color = 'grey'
+      color = 'green'
     }
 
     return (
@@ -42,7 +38,7 @@ class PlaysTable extends Component {
 }
 
 export default connect(createStructuredSelector({
-  plays: getCurrentPlays,
+  sessions: getCurrentSessions,
   startDate: state => moment(state.router.query.startDate, 'YYYY-MM-DD'),
   endDate: state => moment(state.router.query.endDate, 'YYYY-MM-DD'),
-}))(PlaysTable)
+}))(SessionsTable)

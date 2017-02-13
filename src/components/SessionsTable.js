@@ -4,14 +4,14 @@ import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 import { createStructuredSelector } from 'reselect'
 
-import { getPlaysByItem } from 'tenbyten/selectors/plays'
+import { getCurrentSessionsByItem } from 'tenbyten/selectors/sessions'
 import { getCurrentGeekList } from 'tenbyten/selectors/geekLists'
 
-import PlaysRow from 'tenbyten/components/PlaysRow'
+import SessionsRow from 'tenbyten/components/SessionsRow'
 
-class PlaysTable extends Component {
+class SessionsTable extends Component {
   static propTypes = {
-    playsByItem: pt.object,
+    sessionsByItem: pt.object,
     geekList: pt.shape({
       items: pt.arrayOf(pt.shape({
         id: pt.number.isRequired,
@@ -21,20 +21,20 @@ class PlaysTable extends Component {
   }
 
   render () {
-    const {playsByItem, geekList} = this.props
+    const {sessionsByItem, geekList} = this.props
 
     if (!geekList) {
       return (<span>Loading...</span>)
     }
 
     const headers = [<Table.HeaderCell key='header-title'>Game</Table.HeaderCell>]
-    for (let i = 1; i < 11; i++) {
+    for (let i = 1; i <= 10; i++) {
       headers.push(<Table.HeaderCell key={`header-${i}`}>{i}</Table.HeaderCell>)
     }
 
     const sortedGeekListItems = [ ...geekList.items ].sort((a, b) => {
-      let alen = (playsByItem[a.id] || []).length
-      let blen = (playsByItem[b.id] || []).length
+      let alen = (sessionsByItem[a.id] || []).length
+      let blen = (sessionsByItem[b.id] || []).length
       return blen - alen
     })
 
@@ -47,10 +47,10 @@ class PlaysTable extends Component {
         </Table.Header>
         <Table.Body>
           {sortedGeekListItems.map(item => (
-            <PlaysRow
-              key={`playrow-${item.id}`}
+            <SessionsRow
+              key={item.id}
               item={item}
-              plays={playsByItem[item.id] || []}
+              sessions={sessionsByItem[item.id] || []}
             />
           ))}
         </Table.Body>
@@ -60,6 +60,6 @@ class PlaysTable extends Component {
 }
 
 export default connect(createStructuredSelector({
-  playsByItem: getPlaysByItem,
+  sessionsByItem: getCurrentSessionsByItem,
   geekList: getCurrentGeekList,
-}))(PlaysTable)
+}))(SessionsTable)
