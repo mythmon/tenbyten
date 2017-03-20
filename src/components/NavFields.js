@@ -1,12 +1,11 @@
 import React, { Component, PropTypes as pt } from 'react'
-import { connect } from 'react-redux'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
 import moment from 'moment'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 
-class NavFields extends Component {
+export default class NavFields extends Component {
   static propTypes = {
     defaultUsername: pt.string,
     defaultListId: pt.number,
@@ -17,14 +16,14 @@ class NavFields extends Component {
   constructor (props) {
     super(props)
 
-    const startDate = props.defaultStartDate || moment().startOf('year')
-    const endDate = props.defaultEndDate || moment().endOf('year')
+    const startDate = props.defaultStartDate
+    const endDate = props.defaultEndDate
 
     this.state = {
       name: props.defaultUsername || '',
       list: (props.defaultListId || '').toString(),
-      startDate: startDate.format(DATE_FORMAT),
-      endDate: endDate.format(DATE_FORMAT),
+      startDate: startDate ? startDate.format(DATE_FORMAT) : '',
+      endDate: endDate ? endDate.format(DATE_FORMAT) : '',
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -66,6 +65,3 @@ class NavFields extends Component {
     )
   }
 }
-export default connect(
-  (state, ownProps) => ownProps,
-)(NavFields)

@@ -9,13 +9,14 @@ import QueryGeekList from 'tenbyten/components/data/QueryGeekList'
 import SessionsTable from 'tenbyten/components/SessionsTable'
 import PlayersList from 'tenbyten/components/PlayersList'
 import ChallengeProgress from 'tenbyten/components/ChallengeProgress'
+import * as challegeSelector from 'tenbyten/selectors/challenge'
 
 class TenByTen extends Component {
   static propTypes = {
     listId: pt.number.isRequired,
     username: pt.string.isRequired,
-    startDate: pt.instanceOf(moment).isRequired,
-    endDate: pt.instanceOf(moment).isRequired,
+    startDate: pt.instanceOf(moment),
+    endDate: pt.instanceOf(moment),
   }
 
   render () {
@@ -26,7 +27,12 @@ class TenByTen extends Component {
         <QueryPlays username={username} startDate={startDate} endDate={endDate} />
         <QueryGeekList listId={listId} />
 
-        <NavFields defaultUsername={username} defaultListId={listId} />
+        <NavFields
+          defaultUsername={username}
+          defaultListId={listId}
+          defaultStartDate={startDate}
+          defaultEndDate={endDate}
+        />
         <div className='row'>
           <div className='row-item collapse'>
             <PlayersList />
@@ -42,8 +48,8 @@ class TenByTen extends Component {
 }
 
 export default connect(createStructuredSelector({
-  username: state => state.router.params.username,
-  listId: state => parseInt(state.router.params.listId),
-  startDate: state => moment(state.router.query.startDate, 'YYYY-MM-DD'),
-  endDate: state => moment(state.router.query.endDate, 'YYYY-MM-DD'),
+  username: challegeSelector.getUsername,
+  listId: challegeSelector.getListId,
+  startDate: challegeSelector.getStartDate,
+  endDate: challegeSelector.getEndDate,
 }))(TenByTen)

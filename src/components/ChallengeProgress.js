@@ -6,6 +6,7 @@ import Progress from 'semantic-ui-react/dist/commonjs/modules/Progress/Progress'
 import 'semantic-ui-css/components/progress.css'
 
 import { getCurrentSessions } from 'tenbyten/selectors/sessions'
+import { getStartDate, getEndDate } from 'tenbyten/selectors/challenge'
 
 class SessionsTable extends Component {
   static propTypes = {
@@ -39,6 +40,6 @@ class SessionsTable extends Component {
 
 export default connect(createStructuredSelector({
   sessions: getCurrentSessions,
-  startDate: state => moment(state.router.query.startDate, 'YYYY-MM-DD'),
-  endDate: state => moment(state.router.query.endDate, 'YYYY-MM-DD'),
+  startDate: getStartDate,
+  endDate: getEndDate,
 }))(SessionsTable)

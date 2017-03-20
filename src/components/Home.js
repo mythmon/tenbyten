@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import NavFields from 'tenbyten/components/NavFields'
+import GeekListSearch from 'tenbyten/components/GeekListSearch'
 
 export default class Home extends Component {
   render () {
@@ -12,7 +12,7 @@ export default class Home extends Component {
         <p>
           Use the controls below to choose a Geeklist to get games from, and a user to get plays from.
         </p>
-        <NavFields />
+        <GeekListSearch />
       </div>
     )
   }

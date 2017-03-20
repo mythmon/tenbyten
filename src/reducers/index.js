@@ -5,6 +5,7 @@ import items from 'tenbyten/reducers/items'
 import players from 'tenbyten/reducers/players'
 import plays from 'tenbyten/reducers/plays'
 import requests from 'tenbyten/reducers/requests'
+import geekListSearch from 'tenbyten/reducers/geekListSearch'
 
 export default combineReducers({
   geekLists,
@@ -12,4 +13,5 @@ export default combineReducers({
   players,
   plays,
   requests,
+  geekListSearch,
 })
