@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
+import { autobind } from 'core-decorators'
 
 import * as geekListSearchActions from 'tenbyten/state/geekListSearch/actions'
 import QueryGeekListSearch from 'tenbyten/components/data/QueryGeekListSearch'
@@ -11,7 +12,14 @@ import GeekListLink from 'tenbyten/components/GeekListLink'
 import Spinner from 'tenbyten/components/Spinner'
 import { getUsername, getCurrentSearchResults } from 'tenbyten/state/geekListSearch/selectors'
 
-class GeekListSearch extends Component {
+@connect(
+  createStructuredSelector({
+    username: getUsername,
+    searchResults: getCurrentSearchResults,
+  }),
+  dispatch => bindActionCreators(geekListSearchActions, dispatch),
+)
+export default class GeekListSearch extends Component {
   static propTypes = {
     username: pt.string.isRequired,
     searchResults: pt.shape({
@@ -22,26 +30,9 @@ class GeekListSearch extends Component {
     setSearchUsername: pt.func.isRequired,
   }
 
-  constructor (props) {
-    super(props)
-
-    this.handleChange = this.handleChange.bind(this)
-    this.navigate = this.navigate.bind(this)
-  }
-
+  @autobind
   handleChange (ev) {
     this.props.setSearchUsername(ev.target.value)
-  }
-
-  navigate (ev) {
-    ev.preventDefault()
-    const {name, list, startDate, endDate} = this.state
-    const onGithub = window.location.hostname.indexOf('github.io') !== -1
-    let newUrl = `/table/${list}/${name}/?startDate=${startDate}&endDate=${endDate}`
-    if (onGithub) {
-      newUrl = '/tenbyten' + newUrl
-    }
-    window.location = newUrl
   }
 
   render () {
@@ -50,7 +41,7 @@ class GeekListSearch extends Component {
     return (
       <div>
         <QueryGeekListSearch />
-        <Form size='mini' onSubmit={this.navigate}>
+        <Form size='mini'>
           <Form.Group inline>
             <Form.Input label='Username' name='username' value={username} onChange={this.handleChange} />
             {searchResults && searchResults.status === 'pending' && <Spinner />}
@@ -67,11 +58,3 @@ class GeekListSearch extends Component {
     )
   }
 }
-
-export default connect(
-  createStructuredSelector({
-    username: getUsername,
-    searchResults: getCurrentSearchResults,
-  }),
-  dispatch => bindActionCreators(geekListSearchActions, dispatch),
-)(GeekListSearch)

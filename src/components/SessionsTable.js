@@ -9,7 +9,11 @@ import { getCurrentGeekList } from 'tenbyten/state/geekLists/selectors'
 
 import SessionsRow from 'tenbyten/components/SessionsRow'
 
-class SessionsTable extends Component {
+@connect(createStructuredSelector({
+  sessionsByItem: getCurrentSessionsByItem,
+  geekList: getCurrentGeekList,
+}))
+export default class SessionsTable extends Component {
   static propTypes = {
     sessionsByItem: pt.object,
     geekList: pt.shape({
@@ -58,8 +62,3 @@ class SessionsTable extends Component {
     )
   }
 }
-
-export default connect(createStructuredSelector({
-  sessionsByItem: getCurrentSessionsByItem,
-  geekList: getCurrentGeekList,
-}))(SessionsTable)

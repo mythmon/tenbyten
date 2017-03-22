@@ -5,7 +5,10 @@ import cx from 'classnames'
 
 import { getAnyRequestLoading } from 'tenbyten/state/requests/selectors'
 
-class LoadingIndicator extends Component {
+@connect(createStructuredSelector({
+  isLoading: getAnyRequestLoading,
+}))
+export default class LoadingIndicator extends Component {
   static propTypes = {
     isLoading: pt.bool.isRequired,
   }
@@ -18,7 +21,3 @@ class LoadingIndicator extends Component {
     )
   }
 }
-
-export default connect(createStructuredSelector({
-  isLoading: getAnyRequestLoading,
-}))(LoadingIndicator)

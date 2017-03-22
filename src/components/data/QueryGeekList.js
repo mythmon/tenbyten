@@ -4,7 +4,13 @@ import { bindActionCreators } from 'redux'
 
 import { requestGeekList } from 'tenbyten/state/geekLists/actions'
 
-class QueryGeekList extends Component {
+@connect(
+  (state, { listId }) => ({
+    requestState: state.requests[`geekList/${listId}`],
+  }),
+  dispatch => bindActionCreators({requestGeekList}, dispatch),
+)
+export default class QueryGeekList extends Component {
   static propTypes = {
     listId: pt.number.isRequired,
     requestState: pt.shape({
@@ -35,11 +41,3 @@ class QueryGeekList extends Component {
     return null
   }
 }
-
-export default connect(
-  (state, { listId }) => ({
-    listId,
-    requestState: state.requests[`geekList/${listId}`],
-  }),
-  dispatch => bindActionCreators({requestGeekList}, dispatch),
-)(QueryGeekList)

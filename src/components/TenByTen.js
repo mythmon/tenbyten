@@ -11,7 +11,13 @@ import PlayersList from 'tenbyten/components/PlayersList'
 import ChallengeProgress from 'tenbyten/components/ChallengeProgress'
 import * as challegeSelector from 'tenbyten/state/challenge/selectors'
 
-class TenByTen extends Component {
+@connect(createStructuredSelector({
+  username: challegeSelector.getUsername,
+  listId: challegeSelector.getListId,
+  startDate: challegeSelector.getStartDate,
+  endDate: challegeSelector.getEndDate,
+}))
+export default class TenByTen extends Component {
   static propTypes = {
     listId: pt.number.isRequired,
     username: pt.string.isRequired,
@@ -46,10 +52,3 @@ class TenByTen extends Component {
     )
   }
 }
-
-export default connect(createStructuredSelector({
-  username: challegeSelector.getUsername,
-  listId: challegeSelector.getListId,
-  startDate: challegeSelector.getStartDate,
-  endDate: challegeSelector.getEndDate,
-}))(TenByTen)

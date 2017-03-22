@@ -2,6 +2,7 @@ import React, { Component, PropTypes as pt } from 'react'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
 import moment from 'moment'
+import { autobind } from 'core-decorators'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 
@@ -25,17 +26,16 @@ export default class NavFields extends Component {
       startDate: startDate ? startDate.format(DATE_FORMAT) : '',
       endDate: endDate ? endDate.format(DATE_FORMAT) : '',
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.navigate = this.navigate.bind(this)
   }
 
+  @autobind
   handleChange (ev) {
     this.setState({
       [ev.target.name]: ev.target.value,
     })
   }
 
+  @autobind
   navigate (ev) {
     ev.preventDefault()
     const {name, list, startDate, endDate} = this.state

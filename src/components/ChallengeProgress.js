@@ -8,7 +8,12 @@ import 'semantic-ui-css/components/progress.css'
 import { getCurrentSessions } from 'tenbyten/state/sessions/selectors'
 import { getStartDate, getEndDate } from 'tenbyten/state/challenge/selectors'
 
-class SessionsTable extends Component {
+@connect(createStructuredSelector({
+  sessions: getCurrentSessions,
+  startDate: getStartDate,
+  endDate: getEndDate,
+}))
+export default class SessionsTable extends Component {
   static propTypes = {
     sessions: pt.array.isRequired,
     startDate: pt.instanceOf(moment).isRequired,
@@ -37,9 +42,3 @@ class SessionsTable extends Component {
     )
   }
 }
-
-export default connect(createStructuredSelector({
-  sessions: getCurrentSessions,
-  startDate: getStartDate,
-  endDate: getEndDate,
-}))(SessionsTable)

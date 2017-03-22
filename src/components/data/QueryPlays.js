@@ -5,7 +5,21 @@ import moment from 'moment'
 
 import { requestPlayList } from 'tenbyten/state/plays/actions'
 
-class QueryPlays extends Component {
+@connect(
+  (state, {username, startDate, endDate}) => {
+    let fmt = 'YYYY-MM-DD'
+    let requestKey = `playList/${username}/${startDate.format(fmt)}/${endDate.format(fmt)}`
+
+    return {
+      username,
+      startDate,
+      endDate,
+      requestState: state.requests[requestKey],
+    }
+  },
+  dispatch => bindActionCreators({requestPlayList}, dispatch),
+)
+export default class QueryPlays extends Component {
   static propTypes = {
     username: pt.string.isRequired,
     startDate: pt.instanceOf(moment).isRequired,
@@ -40,18 +54,3 @@ class QueryPlays extends Component {
     return null
   }
 }
-
-export default connect(
-  (state, {username, startDate, endDate}) => {
-    let fmt = 'YYYY-MM-DD'
-    let requestKey = `playList/${username}/${startDate.format(fmt)}/${endDate.format(fmt)}`
-
-    return {
-      username,
-      startDate,
-      endDate,
-      requestState: state.requests[requestKey],
-    }
-  },
-  dispatch => bindActionCreators({requestPlayList}, dispatch),
-)(QueryPlays)

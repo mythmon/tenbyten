@@ -4,7 +4,11 @@ import { bindActionCreators } from 'redux'
 
 import { searchForGeekLists } from 'tenbyten/state/geekListSearch/actions'
 
-class QueryGeekListSearch extends Component {
+@connect(
+  state => state.geekListSearch,
+  dispatch => bindActionCreators({searchForGeekLists}, dispatch),
+)
+export default class QueryGeekListSearch extends Component {
   static propTypes = {
     username: pt.string,
     searchResults: pt.object.isRequired,
@@ -42,8 +46,3 @@ class QueryGeekListSearch extends Component {
     return null
   }
 }
-
-export default connect(
-  state => state.geekListSearch,
-  dispatch => bindActionCreators({searchForGeekLists}, dispatch),
-)(QueryGeekListSearch)
