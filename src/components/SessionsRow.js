@@ -12,12 +12,10 @@ export default class SessionsRow extends Component {
     }),
     sessions: pt.array.isRequired,
     maxSessions: pt.number,
-    showOverflow: pt.bool,
   }
 
   static defaultProps = {
     maxSessions: 10,
-    showOverflow: true,
   }
 
   render () {
@@ -51,7 +49,7 @@ export default class SessionsRow extends Component {
           </header>
           {averagePlayTime !== null &&
             <div name='average-play-time'>
-              Ø {averagePlayTime} mins
+              Ø {averagePlayTime}            mins
             </div>
           }
         </Table.Cell>

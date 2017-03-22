@@ -4,8 +4,8 @@ import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 import { createStructuredSelector } from 'reselect'
 
-import { getCurrentSessionsByItem } from 'tenbyten/selectors/sessions'
-import { getCurrentGeekList } from 'tenbyten/selectors/geekLists'
+import { getCurrentSessionsByItem } from 'tenbyten/state/sessions/selectors'
+import { getCurrentGeekList } from 'tenbyten/state/geekLists/selectors'
 
 import SessionsRow from 'tenbyten/components/SessionsRow'
 

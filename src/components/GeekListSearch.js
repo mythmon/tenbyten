@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
-import * as geekListSearchActions from 'tenbyten/actions/geekListSearch'
+
+import * as geekListSearchActions from 'tenbyten/state/geekListSearch/actions'
 import QueryGeekListSearch from 'tenbyten/components/data/QueryGeekListSearch'
 import GeekListLink from 'tenbyten/components/GeekListLink'
 import Spinner from 'tenbyten/components/Spinner'
-import { getUsername, getCurrentSearchResults } from 'tenbyten/selectors/geekListSearch'
+import { getUsername, getCurrentSearchResults } from 'tenbyten/state/geekListSearch/selectors'
 
 class GeekListSearch extends Component {
   static propTypes = {

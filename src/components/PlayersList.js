@@ -2,7 +2,7 @@ import React, { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { getCurrentPlayers } from 'tenbyten/selectors/players'
+import { getCurrentPlayers } from 'tenbyten/state/players/selectors'
 import PlayerLabel from 'tenbyten/components/PlayerLabel'
 
 class SessionsTable extends Component {

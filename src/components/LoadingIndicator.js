@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import cx from 'classnames'
 
-import { getAnyRequestLoading } from 'tenbyten/selectors/requests'
+import { getAnyRequestLoading } from 'tenbyten/state/requests/selectors'
 
 class LoadingIndicator extends Component {
   static propTypes = {

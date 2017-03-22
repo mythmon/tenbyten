@@ -5,8 +5,8 @@ import moment from 'moment'
 import Progress from 'semantic-ui-react/dist/commonjs/modules/Progress/Progress'
 import 'semantic-ui-css/components/progress.css'
 
-import { getCurrentSessions } from 'tenbyten/selectors/sessions'
-import { getStartDate, getEndDate } from 'tenbyten/selectors/challenge'
+import { getCurrentSessions } from 'tenbyten/state/sessions/selectors'
+import { getStartDate, getEndDate } from 'tenbyten/state/challenge/selectors'
 
 class SessionsTable extends Component {
   static propTypes = {

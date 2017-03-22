@@ -2,7 +2,7 @@ import { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { searchForGeekLists } from 'tenbyten/actions/geekListSearch'
+import { searchForGeekLists } from 'tenbyten/state/geekListSearch/actions'
 
 class QueryGeekListSearch extends Component {
   static propTypes = {
@@ -17,7 +17,8 @@ class QueryGeekListSearch extends Component {
   }
 
   componentWillMount () {
-    this.request(this.props)
+    const { username, searchResults, searchForGeekLists } = this.props
+    this.request({ username, searchResults, searchForGeekLists })
   }
 
   componentWillReceiveProps (newProps) {
@@ -26,9 +27,7 @@ class QueryGeekListSearch extends Component {
     }
   }
 
-  request (props) {
-    const { username, searchResults, searchForGeekLists } = props
-
+  request ({ username, searchResults, searchForGeekLists }) {
     if (self.requestTimeout) {
       clearTimeout(self.requestTimeout)
       self.requestTimeout = null

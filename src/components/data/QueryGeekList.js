@@ -2,7 +2,7 @@ import { Component, PropTypes as pt } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { requestGeekList } from 'tenbyten/actions/geekLists'
+import { requestGeekList } from 'tenbyten/state/geekLists/actions'
 
 class QueryGeekList extends Component {
   static propTypes = {
@@ -15,7 +15,8 @@ class QueryGeekList extends Component {
   }
 
   componentWillMount () {
-    this.request(this.props)
+    const {listId, requestState, requestGeekList} = this.props
+    this.request({listId, requestState, requestGeekList})
   }
 
   componentWillReceiveProps (newProps) {
@@ -24,8 +25,7 @@ class QueryGeekList extends Component {
     }
   }
 
-  request (props) {
-    const { listId, requestState, requestGeekList } = props
+  request ({ listId, requestState, requestGeekList }) {
     if (!requestState) {
       requestGeekList(listId)
     }

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { getCurrentPlays } from 'tenbyten/selectors/plays'
+import { getCurrentPlays } from 'tenbyten/state/plays/selectors'
 
 export const getCurrentSessions = createSelector(
   [getCurrentPlays],

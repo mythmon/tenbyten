@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import moment from 'moment'
 
-import { requestPlayList } from 'tenbyten/actions/plays'
+import { requestPlayList } from 'tenbyten/state/plays/actions'
 
 class QueryPlays extends Component {
   static propTypes = {
@@ -18,7 +18,8 @@ class QueryPlays extends Component {
   }
 
   componentWillMount () {
-    this.request(this.props)
+    const { username, startDate, endDate, requestState, requestPlayList } = this.props
+    this.request({ username, startDate, endDate, requestState, requestPlayList })
   }
 
   componentWillReceiveProps (newProps) {
@@ -29,8 +30,7 @@ class QueryPlays extends Component {
     }
   }
 
-  request (props) {
-    const { username, startDate, endDate, requestState, requestPlayList } = props
+  request ({ username, startDate, endDate, requestState, requestPlayList }) {
     if (!requestState) {
       requestPlayList(username, startDate, endDate)
     }

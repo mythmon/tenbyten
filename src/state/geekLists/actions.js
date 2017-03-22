@@ -1,5 +1,5 @@
-import { makeBGGRequest } from 'tenbyten/actions/requests'
-import { updateItemMany } from 'tenbyten/actions/items'
+import { makeBGGRequest } from 'tenbyten/state/requests/actions'
+import { updateItemMany } from 'tenbyten/state/items/actions'
 
 export const ADD_GEEK_LIST = 'ADD_GEEK_LIST'
 

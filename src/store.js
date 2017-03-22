@@ -8,7 +8,7 @@ import {
   createMatcher,
 } from 'redux-little-router'
 
-import reducers from 'tenbyten/reducers'
+import { reducer } from 'tenbyten/state'
 import routes from 'tenbyten/routes'
 
 // middleware
@@ -62,8 +62,8 @@ const enhancer = compose(
   ),
 )
 
-export function configureStore (initialState) {
-  const store = createStore(reducers, initialState, enhancer)
+export function configureStore () {
+  const store = createStore(reducer, null, enhancer)
   const initialLocation = store.getState().router
   store.dispatch(initializeCurrentLocation({
     pathname: 'fakepathname',

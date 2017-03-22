@@ -9,7 +9,7 @@ import QueryGeekList from 'tenbyten/components/data/QueryGeekList'
 import SessionsTable from 'tenbyten/components/SessionsTable'
 import PlayersList from 'tenbyten/components/PlayersList'
 import ChallengeProgress from 'tenbyten/components/ChallengeProgress'
-import * as challegeSelector from 'tenbyten/selectors/challenge'
+import * as challegeSelector from 'tenbyten/state/challenge/selectors'
 
 class TenByTen extends Component {
   static propTypes = {

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-import { getAllItems } from 'tenbyten/selectors/items'
+import { getAllItems } from 'tenbyten/state/items/selectors'
 
 export const getCurrentGeekListId = state => state.router.params.listId
 

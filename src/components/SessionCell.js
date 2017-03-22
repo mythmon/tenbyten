@@ -74,7 +74,7 @@ export default class SessionCell extends Component {
                 className='score-label'
               >
                 <span className='points'>
-                  {Math.round(player.score)} pts
+                  {Math.round(player.score)}                  pts
                 </span>
                 <Label.Detail>
                   <PlayerIcon player={player} />
@@ -113,7 +113,7 @@ export default class SessionCell extends Component {
     } else {
       info.push(
         <div name='plays-count' key='plays-count'>
-          {session.plays.length} plays
+          {session.plays.length}          plays
         </div>
       )
 
@@ -150,8 +150,8 @@ export default class SessionCell extends Component {
               className='score-label'
             >
               <span className='points'>
-                {wins[player.id]} wins
-                </span>
+                {wins[player.id]}                wins
+              </span>
               <Label.Detail>
                 <PlayerIcon player={player} />
               </Label.Detail>

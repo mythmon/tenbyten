@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 export const getAllPlayers = state => state.players
 
-import { getCurrentPlays } from 'tenbyten/selectors/plays'
+import { getCurrentPlays } from 'tenbyten/state/plays/selectors'
 
 export const getCurrentPlayers = createSelector(
   [getCurrentPlays, getAllPlayers],

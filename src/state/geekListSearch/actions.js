@@ -1,18 +1,15 @@
-import { makeBGGRequest } from 'tenbyten/actions/requests'
-
-export const GEEKLIST_SEARCH_SET_USERNAME = 'GEEKLIST_SEARCH_SET_USERNAME'
-export const GEEKLIST_SEARCH_SET_RESULT = 'GEEKLIST_SEARCH_SET_RESULT'
+import { makeBGGRequest } from 'tenbyten/state/requests/actions'
 
 export function setSearchUsername (username) {
   return {
-    type: GEEKLIST_SEARCH_SET_USERNAME,
+    type: 'GEEKLIST_SEARCH_SET_USERNAME',
     username,
   }
 }
 
 export function setGeekListSearchResult (username, result) {
   return {
-    type: GEEKLIST_SEARCH_SET_RESULT,
+    type: 'GEEKLIST_SEARCH_SET_RESULT',
     username,
     result,
   }
@@ -40,7 +37,6 @@ export function searchForGeekLists (username) {
     }
 
     const resultTrs = Array.prototype.slice.call(doc.querySelectorAll('.forum_table tbody tr'), 1)
-    console.log('geeklist search results', results)
     const results = []
     const hrefRegex = /^\/geeklist\/(\d+)\/(.*)$/
     for (let tr of resultTrs) {

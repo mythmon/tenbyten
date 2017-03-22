@@ -1,13 +1,6 @@
-import {
-  REQUEST_START,
-  REQUEST_FAIL,
-  REQUEST_PENDING,
-  REQUEST_SUCCESS,
-} from 'tenbyten/actions/requests'
-
 export default function requestsReducer (state = {}, action) {
   switch (action.type) {
-    case REQUEST_START: {
+    case 'REQUEST_START': {
       return {
         ...state,
         [action.requestId]: {
@@ -17,7 +10,7 @@ export default function requestsReducer (state = {}, action) {
       }
     }
 
-    case REQUEST_SUCCESS: {
+    case 'REQUEST_SUCCESS': {
       return {
         ...state,
         [action.requestId]: {
@@ -27,7 +20,7 @@ export default function requestsReducer (state = {}, action) {
       }
     }
 
-    case REQUEST_FAIL: {
+    case 'REQUEST_FAIL': {
       return {
         ...state,
         [action.requestId]: {
@@ -37,7 +30,7 @@ export default function requestsReducer (state = {}, action) {
       }
     }
 
-    case REQUEST_PENDING: {
+    case 'REQUEST_PENDING': {
       return {
         ...state,
         [action.requestId]: {
