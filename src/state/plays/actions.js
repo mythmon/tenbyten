@@ -7,19 +7,16 @@ import { toast } from 'tenbyten/state/toast/actions'
 import { makeBGGRequest } from 'tenbyten/state/requests/actions'
 import nextId from 'tenbyten/utils/nextId'
 
-export const ADD_PLAY = 'ADD_PLAY'
-export const ADD_PLAY_MANY = 'ADD_PLAY_MANY'
-
 export function addPlay (play) {
   return {
-    type: ADD_PLAY,
+    type: 'ADD_PLAY',
     item: play,
   }
 }
 
 export function addPlayMany (plays) {
   return {
-    type: ADD_PLAY_MANY,
+    type: 'ADD_PLAYS',
     items: plays,
   }
 }

@@ -1,8 +1,3 @@
-export const REQUEST_START = 'REQUEST_START'
-export const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
-export const REQUEST_FAIL = 'REQUEST_FAIL'
-export const REQUEST_PENDING = 'REQUEST_PENDING'
-
 const BGG_BASE_URL = 'https://cors-anywhere.herokuapp.com/https://www.boardgamegeek.com'
 export function makeBGGRequest (requestId, endpoint, query = {}) {
   return async dispatch => {
@@ -39,21 +34,21 @@ export function makeBGGRequest (requestId, endpoint, query = {}) {
 
 export function requestStart (requestId) {
   return {
-    type: REQUEST_START,
+    type: 'REQUEST_START',
     requestId,
   }
 }
 
 export function requestSuccess (requestId) {
   return {
-    type: REQUEST_SUCCESS,
+    type: 'REQUEST_SUCCESS',
     requestId,
   }
 }
 
 export function requestFail (requestId, error) {
   return {
-    type: REQUEST_FAIL,
+    type: 'REQUEST_FAIL',
     requestId,
     error,
   }
@@ -61,7 +56,7 @@ export function requestFail (requestId, error) {
 
 export function requestPending (requestId) {
   return {
-    type: REQUEST_PENDING,
+    type: 'REQUEST_PENDING',
     requestId,
   }
 }
