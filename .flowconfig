@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/fbjs/.*
+
+[options]
+# Support the same module aliasing that we use in webpack
+module.name_mapper='^tenbyten/' -> 'src/'
+module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=.
+
+emoji=true
+module.use_strict=true
+strip_root=true
+esproposal.decorators=ignore
