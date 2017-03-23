@@ -20,10 +20,6 @@ const { routerEnhancer, routerMiddleware } = routerForBrowser({
 })
 
 const logger = createLogger({
-  actionTransformer: (action) => ({
-    ...action,
-    type: String(action.type).replace(/^Symbol\(/, '').replace(/\)$/, ''),
-  }),
   colors: {
     title: false,
     prevState: false,
