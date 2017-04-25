@@ -127,7 +127,7 @@ export default class SessionCell extends Component {
           if (!(player.id in players)) {
             players[player.id] = player
           }
-          if (player.score > hiScore) {
+          if (player.score && player.score > hiScore) {
             hiScore = player.score
             winner = player
           }
