@@ -141,3 +141,53 @@
     transform: rotate(360deg);
   }
 }
+
+.ChallengeProgress {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  position: relative;
+  height: 30px;
+  background-color: #e6e6e6;
+}
+
+.ChallengeProgress .bar {
+  color: #888;
+  height: 20px;
+  position: absolute;
+  transition: 0.4s all linear;
+}
+
+.ChallengeProgress .bar.progress {
+  background-color: #21ba45;
+  top: 0;
+  height: 88%;
+  color: #fff;
+  border-radius: 5px 5px 5px 0;
+}
+
+.ChallengeProgress.behindTarget .bar.progress {
+  background-color: #db2828;
+  border-radius: 5px 5px 0 0;
+}
+
+.ChallengeProgress .bar.target {
+  background-color: #777;
+  bottom: 0%;
+  height: 9%;
+  color: #000;
+  border-radius: 0 0 5px 5px;
+}
+
+.ChallengeProgress .text {
+  position: relative;
+  flex-grow: 0;
+  padding: 0 5px;
+  line-height: 26px;
+  white-space: nowrap;
+  transition: 0.4s all linear;
+}
+
+.ChallengeProgress .text.progress {
+  text-align: right;
+}
