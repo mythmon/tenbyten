@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "scripts": {
-    "build": "webpack -p --config webpack.config.prod.js --progress",
+    "build": "webpack -p --config webpack.config.prod.js",
     "dev": "webpack-dev-server --progress --config webpack.config.js --watch",
     "clean": "rimraf build",
     "predeploy": "npm run clean; npm run build",
