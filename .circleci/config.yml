@@ -31,7 +31,7 @@ jobs:
 
       - run:
           name: ESLint
-          command: eslint src
+          command: node_modules/.bin/eslint src
 
       # Deploy to Github Pages
       - deploy:
