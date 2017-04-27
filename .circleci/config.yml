@@ -23,6 +23,10 @@ jobs:
           name: ESLint
           command: node_modules/.bin/eslint src
 
+      - add_ssh_keys:
+          fingerprints:
+            - "9f:18:e6:99:0a:23:5c:c1:06:ce:75:c5:d0:51:19:41"
+
       # Deploy to Github Pages
       - deploy:
           command: |
