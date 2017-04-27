@@ -2,22 +2,12 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:zesty
+      - image: node:7.9.0
 
     working_directory: ~/tenbyten
 
     steps:
       - checkout
-
-      - run:
-          name: Install Yarn
-          command: |
-            apt-get update -qq
-            apt-get install -y -qq dirmngr apt-transport-https
-            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 86E50310
-            echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            apt-get update -qq
-            apt-get install -y -qq nodejs yarn
 
       - restore_cache:
           key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
