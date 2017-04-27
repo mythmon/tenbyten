@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:zesty
+
+    working_directory: ~/tenbyten
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install Yarn
+          command: |
+            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 68576280 86E50310
+            echo "deb http://deb.nodesource.com/node_7.x jessie main" | tee /etc/apt/sources.list.d/nodesource.list
+            echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+            apt-get update -qq
+            apt-get install -y -qq nodejs yarn
+
+      - restore_cache:
+          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+      - run: yarn install
+
+      - save_cache:
+          key: projectname-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - "/home/ubuntu/.yarn-cache"
+
+      - run:
+          name: ESLint
+          command: eslint src
+
+      # Deploy to Github Pages
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              npm run deploy
+            fi
