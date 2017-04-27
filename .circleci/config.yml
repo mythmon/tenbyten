@@ -12,8 +12,10 @@ jobs:
       - run:
           name: Install Yarn
           command: |
-            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            apt-get update -qq
+            apt-get install -y -qq dirmngr
+            apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 86E50310
+            echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
             apt-get update -qq
             apt-get install -y -qq nodejs yarn
 
