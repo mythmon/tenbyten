@@ -1,9 +1,20 @@
+const childProcess = require('child_process')
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 function local (p) {
   return path.resolve(__dirname, './' + p)
+}
+
+function getVersionInfo () {
+  const hash = childProcess.execSync('git rev-parse HEAD').toString().trim()
+  const description = childProcess.execSync('git describe --dirty --always')
+        .toString().trim().replace("'", "\\'")
+  return {
+    __COMMIT_HASH__: `'${hash}'`,
+    __COMMIT_DESCRIPTION__: `'${description}'`,
+  }
 }
 
 module.exports = {
@@ -32,6 +43,7 @@ module.exports = {
     }),
     // Only include english locale in moment
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en)$/),
+    new webpack.DefinePlugin(getVersionInfo()),
   ],
 
   performance: {
