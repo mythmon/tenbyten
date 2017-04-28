@@ -38,7 +38,7 @@ export default class QueryGeekListSearch extends Component {
     }
 
     if (username && !(username in searchResults)) {
-      self.requestTimeout = setTimeout(() => searchForGeekLists(username), 500)
+      self.requestTimeout = setTimeout(() => searchForGeekLists(username), 1000)
     }
   }
 
