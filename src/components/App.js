@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
-import {commitDescription} from 'tenbyten/version'
 import Header from 'tenbyten/components/Header'
 import LoadingIndicator from 'tenbyten/components/LoadingIndicator'
+import Footer from 'tenbyten/components/Footer'
 import {RouteFragments} from 'tenbyten/routes'
 
 export default class App extends Component {
@@ -15,11 +15,7 @@ export default class App extends Component {
           <div className='content'>
             {RouteFragments}
           </div>
-          <footer>
-            <a href='https://github.com/mythmon/tenbyten'>Source on GitHub</a>
-            {' — '}
-            <span>{commitDescription}</span>
-          </footer>
+          <Footer />
         </div>
       </div>
     )

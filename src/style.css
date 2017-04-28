@@ -207,3 +207,30 @@ footer {
   opacity: 0.8;
   margin-top: 1rem;
 }
+
+.commit-info {
+  margin-bottom: -3px;
+}
+
+.commit-info .commit-hash-left,
+.commit-info .commit-hash-right {
+  font-family: monospace;
+  clip-path: inset(0 100% 0 0);
+}
+
+.commit-info .commit-hash-left {
+  transition: clip-path 0.2s;
+}
+
+.commit-info .commit-hash-right {
+  transition: clip-path 0.4s linear;
+}
+
+.commit-info .commit-hash-left[data-expand="1"],
+.commit-info .commit-hash-left[data-expand="2"] {
+  clip-path: inset(0);
+}
+
+.commit-info .commit-hash-right[data-expand="2"] {
+  clip-path: inset(0);
+}
