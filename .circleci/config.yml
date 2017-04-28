@@ -31,5 +31,7 @@ jobs:
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git config user.email "automation@elem.us"
+              git config user.name "Automated Deploy"
               npm run deploy
             fi
