@@ -43,7 +43,13 @@ export default class GeekListSearch extends Component {
         <QueryGeekListSearch />
         <Form size='mini'>
           <Form.Group inline>
-            <Form.Input label='Username' name='username' value={username} onChange={this.handleChange} />
+            <Form.Input
+              label='Username'
+              name='username'
+              value={username}
+              onChange={this.handleChange}
+              autoComplete='off'
+            />
             {searchResults && searchResults.status === 'pending' && <Spinner />}
           </Form.Group>
         </Form>
