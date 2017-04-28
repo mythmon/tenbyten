@@ -1,11 +1,21 @@
+html,
+body,
+#container,
+.root,
 .wrapper {
-  margin: 2vh;
+  min-height: 100vh;
+}
+
+.wrapper {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar {
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
-  padding: 10px 5px;
+  flex: 0 0;
 }
 
 .navbar a,
@@ -22,11 +32,11 @@
 }
 
 .content {
-  padding: 10px;
+  flex: 1 1 100%;
 }
 
 .loading-indicator {
-  height: 0.5vh;
+  height: 0.2rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -190,4 +200,10 @@
 
 .ChallengeProgress .text.progress {
   text-align: right;
+}
+
+footer {
+  flex: 0 0;
+  opacity: 0.8;
+  margin-top: 1rem;
 }
