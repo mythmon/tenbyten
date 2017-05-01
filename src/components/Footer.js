@@ -24,7 +24,7 @@ export default class Footer extends Component {
 
   @autobind
   handleCommitMouseEnter () {
-    this.clearTimers();
+    this.clearTimers()
     this.hoverTimers.push(setTimeout(() => {
       this.setState({ expandCommit: 1 })
     }, 500))
@@ -56,8 +56,8 @@ export default class Footer extends Component {
           className='commit-info'
         >
           <Identicon data={commitHash} />
-          <span className="commit-hash-left" data-expand={expandCommit}>{commitHash.slice(0, 7)}</span>
-          <span className="commit-hash-right" data-expand={expandCommit}>{commitHash.slice(7)}</span>
+          <span className='commit-hash-left' data-expand={expandCommit}>{commitHash.slice(0, 7)}</span>
+          <span className='commit-hash-right' data-expand={expandCommit}>{commitHash.slice(7)}</span>
         </span>
       </footer>
     )
