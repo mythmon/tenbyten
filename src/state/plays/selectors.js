@@ -6,11 +6,20 @@ export const getCurrentUser = state => state.router.params.username
 
 export const getAllPlays = state => (
   Object.values(state.plays)
-  .map(play => ({
-    ...play,
-    item: state.items[play.item],
-    players: play.players.map(player => ({ ...state.players[player.id], ...player })),
-  }))
+    .map(play => ({
+      ...play,
+      item: state.items[play.item],
+      players: play.players.map(player => ({ ...state.players[player.id], ...player })),
+    }))
+    .sort((a, b) => {
+      if (a.date > b.date) {
+        return 1
+      } else if (a.date < b.date) {
+        return -1
+      } else {
+        return 0
+      }
+    })
 )
 
 export const getCurrentPlays = createSelector(
