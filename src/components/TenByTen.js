@@ -30,8 +30,8 @@ export default class TenByTen extends Component {
 
     return (
       <div>
-        <QueryPlays username={username} startDate={startDate} endDate={endDate} />
-        <QueryGeekList listId={listId} />
+        <QueryPlays />
+        <QueryGeekList />
 
         <NavFields
           defaultUsername={username}
