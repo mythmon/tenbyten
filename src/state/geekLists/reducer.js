@@ -1,3 +1,3 @@
 import makeCollectionReducer from 'tenbyten/state/collection'
 
-export default makeCollectionReducer({ addOne: 'ADD_GEEK_LIST' })
+export default makeCollectionReducer('GEEK_LIST')

@@ -23,7 +23,7 @@ export const getAllPlays = state => (
 )
 
 export const getCurrentPlays = createSelector(
-  [getCurrentUser, getAllPlays, getCurrentGeekList],
+  getCurrentUser, getAllPlays, getCurrentGeekList,
   (currentUser, allPlays, currentGeekList) => {
     let plays = allPlays.filter(play => play.creator === currentUser)
 

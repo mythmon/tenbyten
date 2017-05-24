@@ -1,4 +1,5 @@
-import { Component, PropTypes as pt } from 'react'
+// @flow
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
@@ -12,11 +13,11 @@ import { getListId } from 'tenbyten/state/challenge/selectors'
   }),
   dispatch => bindActionCreators({requestGeekList}, dispatch),
 )
-export default class QueryGeekList extends Component {
-  static propTypes = {
-    listId: pt.number.isRequired,
-    requestGeekList: pt.func.isRequired,
-  }
+export default class QueryGeekList extends React.Component {
+  props: {
+    listId: number,
+    requestGeekList: number => void,
+  };
 
   render () {
     const { requestGeekList, listId } = this.props

@@ -14,6 +14,7 @@
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-flowtype": "^2.30.4",
     "flow-bin": "^0.42.0",
+    "flow-coverage-report": "^0.3.0",
     "flow-typed": "^2.0.0",
     "identicon.js": "^2.1.0",
     "js-yaml": "^3.8.2",

@@ -1,12 +1,13 @@
-import React, { Component, PropTypes as pt } from 'react'
+// @flow
+import React from 'react'
 import { Link } from 'redux-little-router'
 
-export default class GeekListLink extends Component {
-  static propTypes = {
-    title: pt.string.isRequired,
-    creator: pt.string.isRequired,
-    id: pt.number.isRequired,
-  }
+export default class GeekListLink extends React.Component {
+  props: {
+    title: string,
+    creator: string,
+    id: number,
+  };
 
   render () {
     const { title, id, creator } = this.props

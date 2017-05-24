@@ -1,13 +1,13 @@
 export function updatePlayer (player) {
   return {
-    type: 'UPDATE_PLAYER',
+    type: 'PLAYER_UPDATE',
     item: player,
   }
 }
 
 export function updatePlayerMany (players) {
   return {
-    type: 'UPDATE_PLAYERS',
+    type: 'PLAYER_UPDATE_MANY',
     items: players,
   }
 }

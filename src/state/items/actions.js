@@ -1,13 +1,13 @@
 export function updateItem (item) {
   return {
-    type: 'UPDATE_ITEM',
+    type: 'ITEM_UPDATE',
     item,
   }
 }
 
 export function updateItemMany (items) {
   return {
-    type: 'UPDATE_ITEMS',
+    type: 'ITEM_UPDATE_MANY',
     items,
   }
 }

@@ -3,7 +3,7 @@ import { updateItemMany } from 'tenbyten/state/items/actions'
 
 export function addGeekList (geekList) {
   return {
-    type: 'ADD_GEEK_LIST',
+    type: 'GEEK_LIST_ADD',
     item: geekList,
   }
 }

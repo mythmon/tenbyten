@@ -9,14 +9,14 @@ import nextId from 'tenbyten/utils/nextId'
 
 export function addPlay (play) {
   return {
-    type: 'ADD_PLAY',
+    type: 'PLAY_ADD',
     item: play,
   }
 }
 
 export function addPlayMany (plays) {
   return {
-    type: 'ADD_PLAYS',
+    type: 'PLAY_ADD_MANY',
     items: plays,
   }
 }

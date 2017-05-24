@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+// @flow
+import React from 'react'
 import moment from 'moment'
 import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
 import FaCommentingO from 'react-icons/lib/fa/commenting-o'
@@ -14,17 +15,12 @@ import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 import PlayerIcon from 'tenbyten/components/PlayerIcon'
 import * as playerUtils from 'tenbyten/utils/players'
 
-export default class SessionCell extends Component {
-  static propTypes = {
-    session: pt.shape({
-      plays: pt.arrayOf(pt.shape({
-        id: pt.number.isRequired,
-        date: pt.instanceOf(moment).isRequired,
-        comments: pt.string,
-        commentsParsed: pt.object,
-      })),
-      date: pt.instanceOf(moment).isRequired,
-    }).isRequired,
+import type { Session } from 'tenbyten/state/sessions/types'
+import type { Player } from 'tenbyten/state/players/types'
+
+export default class SessionCell extends React.Component {
+  props: {
+    session: Session,
   }
 
   static defaultProps = {
@@ -139,11 +135,11 @@ export default class SessionCell extends Component {
         }
       }
 
-      const [winners, losers] = _.partition(Object.values(players), player => !!wins[player.id])
+      const [winners, losers] = _.partition(Object.values(players), (player: Player) => !!wins[player.id])
 
       info.push(
         <div name='players' key='players'>
-          {winners.map((player, idx) => (
+          {winners.map((player: Player, idx: number) => (
             <Label
               key={`player-wins-${player.id}-${idx}`}
               basic
