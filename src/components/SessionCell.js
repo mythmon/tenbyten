@@ -74,7 +74,7 @@ export default class SessionCell extends Component {
                 className='score-label'
               >
                 <span className='points'>
-                  {Math.round(player.score)}                  pts
+                  {Math.floor(player.score)} pts
                 </span>
                 <Label.Detail>
                   <PlayerIcon player={player} />
