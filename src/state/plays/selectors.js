@@ -4,23 +4,31 @@ import { getCurrentGeekList } from 'tenbyten/state/geekLists/selectors'
 
 export const getCurrentUser = state => state.router.params.username
 
-export const getAllPlays = state => (
-  Object.values(state.plays)
-    .map(play => ({
-      ...play,
+export const getAllPlays = state => {
+  const plays = []
+  for (let key in state.plays) {
+    const play = state.plays[key]
+    plays.push({
+      id: play.id,
+      date: play.date,
       item: state.items[play.item],
       players: play.players.map(player => ({ ...state.players[player.id], ...player })),
-    }))
-    .sort((a, b) => {
-      if (a.date > b.date) {
-        return 1
-      } else if (a.date < b.date) {
-        return -1
-      } else {
-        return 0
-      }
+      comments: play.comments,
+      commentsParsed: play.commentsParsed,
+      creator: play.creator,
     })
-)
+  }
+  plays.sort((a, b) => {
+    if (+a.date > +b.date) {
+      return 1
+    } else if (+a.date < +b.date) {
+      return -1
+    } else {
+      return 0
+    }
+  })
+  return plays
+}
 
 export const getCurrentPlays = createSelector(
   getCurrentUser, getAllPlays, getCurrentGeekList,
@@ -37,8 +45,8 @@ export const getCurrentPlays = createSelector(
 )
 
 export const getPlaysByItem = createSelector(
-  [getCurrentPlays],
-  plays => {
+  getCurrentPlays,
+  (plays) => {
     const playsByItem = {}
     for (const play of plays) {
       const key = play.item.id

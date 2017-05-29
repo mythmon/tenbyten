@@ -7,9 +7,7 @@ export type CollectionState<T> = {
   [number]: T,
 }
 
-type CollectionReducer<T> = {
-  [string]: {[Action]: (CollectionState<T>, any) => CollectionState<T>}
-}
+type CollectionReducer<T> = (CollectionState<T>, Action) => CollectionState<T>
 
 export default function makeCollectionReducer<T: {id: number}> (prefix: string): CollectionReducer<T> {
   const initialState: CollectionState<T> = {}

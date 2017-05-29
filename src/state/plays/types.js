@@ -10,6 +10,7 @@ export type NormalizedPlay = {
   commentsParsed: ?{[string]: any},
   players: Array<number>,
   item: NormalizedItem,
+  creator: number,
 }
 
 export type Play = {
@@ -19,6 +20,7 @@ export type Play = {
   commentsParsed: ?{[string]: any},
   players: Array<Player>,
   item: Item,
+  creator: number,
 }
 
 export type PlaysState = CollectionState<NormalizedPlay>

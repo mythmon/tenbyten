@@ -4,7 +4,6 @@ import { createSelector } from 'reselect'
 import { getAllItems } from 'tenbyten/state/items/selectors'
 
 import type { State } from 'tenbyten/state/types'
-import type { Item } from 'tenbyten/state/items/types'
 import type { GeekList, NormalizedGeekList } from 'tenbyten/state/geekLists/types'
 
 export function getCurrentGeekListId (state: State): number {
@@ -15,7 +14,7 @@ export function getAllGeekLists (state: State): {[number]: NormalizedGeekList} {
   return state.geekLists
 }
 
-export const getCurrentGeekList = createSelector(
+export const getCurrentGeekList: (State) => ?GeekList = createSelector(
   getCurrentGeekListId, getAllGeekLists, getAllItems,
   function (geekListId, allGeekLists, allItems) {
     if (!(geekListId in allGeekLists)) {

@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import moment from 'moment'
 import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
 import FaCommentingO from 'react-icons/lib/fa/commenting-o'
 import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
