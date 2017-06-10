@@ -9,13 +9,9 @@ export const getAllPlays = state => {
   for (let key in state.plays) {
     const play = state.plays[key]
     plays.push({
-      id: play.id,
-      date: play.date,
+      ...play,
       item: state.items[play.item],
       players: play.players.map(player => ({ ...state.players[player.id], ...player })),
-      comments: play.comments,
-      commentsParsed: play.commentsParsed,
-      creator: play.creator,
     })
   }
   plays.sort((a, b) => {
