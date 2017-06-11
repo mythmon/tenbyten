@@ -1,20 +1,16 @@
-// @flow
 import { createSelector } from 'reselect'
 
 import { getAllItems } from 'tenbyten/state/items/selectors'
 
-import type { State } from 'tenbyten/state/types'
-import type { GeekList, NormalizedGeekList } from 'tenbyten/state/geekLists/types'
-
-export function getCurrentGeekListId (state: State): number {
+export function getCurrentGeekListId (state) {
   return state.router.params.listId
 }
 
-export function getAllGeekLists (state: State): {[number]: NormalizedGeekList} {
+export function getAllGeekLists (state) {
   return state.geekLists
 }
 
-export const getCurrentGeekList: (State) => ?GeekList = createSelector(
+export const getCurrentGeekList = createSelector(
   getCurrentGeekListId, getAllGeekLists, getAllItems,
   function (geekListId, allGeekLists, allItems) {
     if (!(geekListId in allGeekLists)) {

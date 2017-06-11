@@ -1,12 +1,11 @@
-// @flow
-import React from 'react'
+import React, { PropTypes as pt } from 'react'
 import { Link } from 'redux-little-router'
 
 export default class GeekListLink extends React.Component {
-  props: {
-    title: string,
-    creator: string,
-    id: number,
+  static propTypes = {
+    title: pt.string.isRequired,
+    creator: pt.string.isRequired,
+    id: pt.number.isRequired,
   };
 
   render () {

@@ -1,5 +1,4 @@
-// @flow
-import React from 'react'
+import React, { PropTypes as pt } from 'react'
 import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
 import FaCommentingO from 'react-icons/lib/fa/commenting-o'
 import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
@@ -14,12 +13,9 @@ import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 import PlayerIcon from 'tenbyten/components/PlayerIcon'
 import * as playerUtils from 'tenbyten/utils/players'
 
-import type { Session } from 'tenbyten/state/sessions/types'
-import type { Player } from 'tenbyten/state/players/types'
-
 export default class SessionCell extends React.Component {
-  props: {
-    session: Session,
+  static propTypes = {
+    session: pt.object.isRequired,
   }
 
   static defaultProps = {
@@ -134,11 +130,11 @@ export default class SessionCell extends React.Component {
         }
       }
 
-      const [winners, losers] = _.partition(Object.values(players), (player: Player) => !!wins[player.id])
+      const [winners, losers] = _.partition(Object.values(players), player => !!wins[player.id])
 
       info.push(
         <div name='players' key='players'>
-          {winners.map((player: Player, idx: number) => (
+          {winners.map((player, idx) => (
             <Label
               key={`player-wins-${player.id}-${idx}`}
               basic

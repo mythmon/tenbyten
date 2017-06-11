@@ -1,4 +1,3 @@
-// @flow
 import { compose, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -12,10 +11,8 @@ import {
 import { reducer } from 'tenbyten/state'
 import routes from 'tenbyten/routes'
 
-import type { State, Action } from 'tenbyten/state/types'
-
 // middleware
-const onGithub: boolean = window.location.hostname.indexOf('github.io') !== -1
+const onGithub = window.location.hostname.indexOf('github.io') !== -1
 console.log('onGithub', onGithub)
 const { routerEnhancer, routerMiddleware } = routerForBrowser({
   routes,
@@ -62,7 +59,7 @@ const enhancer: Function = compose(
 )
 
 export function configureStore () {
-  const store: Store<State, Action> = createStore(reducer, null, enhancer)
+  const store = createStore(reducer, null, enhancer)
   const initialLocation = store.getState().router
   store.dispatch(initializeCurrentLocation({
     pathname: 'fakepathname',

@@ -1,19 +1,10 @@
-// @flow
 import createReducer from 'tenbyten/utils/createReducer'
 
-import type { Action } from 'tenbyten/state/types'
-
-export type CollectionState<T> = {
-  [number]: T,
-}
-
-type CollectionReducer<T> = (CollectionState<T>, Action) => CollectionState<T>
-
-export default function makeCollectionReducer<T: {id: number}> (prefix: string): CollectionReducer<T> {
-  const initialState: CollectionState<T> = {}
+export default function makeCollectionReducer (prefix) {
+  const initialState = {}
   const handlers = {}
 
-  handlers[prefix + '_UPDATE'] = (state: CollectionState<T>, {item}: {item: T}): CollectionState<T> => ({
+  handlers[prefix + '_UPDATE'] = (state, {item}) => ({
     ...state,
     [item.id]: {
       ...state[item.id],
@@ -21,7 +12,7 @@ export default function makeCollectionReducer<T: {id: number}> (prefix: string):
     },
   })
 
-  handlers[prefix + '_UPDATE_MANY'] = (state: CollectionState<T>, {items}: {items: Array<T>}): CollectionState<T> => {
+  handlers[prefix + '_UPDATE_MANY'] = (state, {items}) => {
     const newState = {...state}
     for (let item of items) {
       newState[item.id] = { ...newState[item.id], ...item }
@@ -29,12 +20,12 @@ export default function makeCollectionReducer<T: {id: number}> (prefix: string):
     return newState
   }
 
-  handlers[prefix + '_ADD'] = (state: CollectionState<T>, {item}: {item: T}): CollectionState<T> => ({
+  handlers[prefix + '_ADD'] = (state, {item}) => ({
     ...state,
     [item.id]: { ...item },
   })
 
-  handlers[prefix + '_ADD_MANY'] = (state: CollectionState<T>, {items}: {items: Array<T>}): CollectionState<T> => {
+  handlers[prefix + '_ADD_MANY'] = (state, {items}) => {
     const newState = { ...state }
     for (const item of items) {
       newState[item.id] = { ...item }
