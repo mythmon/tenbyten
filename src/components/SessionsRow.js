@@ -34,22 +34,17 @@ export default class SessionsRow extends Component {
       )
     }
 
-    let averagePlayTime = null
-    const plays = sessions.map(session => session.plays).reduce((a, b) => a.concat(b), [])
-    const playTimes = plays.map(play => play.length).filter(a => a > 0)
-    if (playTimes.length > 0) {
-      averagePlayTime = Math.round(playTimes.reduce((a, b) => a + b, 0) / playTimes.length)
-    }
-
     return (
       <Table.Row className='plays-row'>
         <Table.Cell className='plays-row-header'>
           <header>
             {item.name}
           </header>
-          {averagePlayTime !== null &&
+          {item.averagePlayTime !== null &&
             <div name='average-play-time'>
-              Ø {averagePlayTime}            mins
+              Ø
+              {item.averagePlayTime}
+            mins
             </div>
           }
         </Table.Cell>
