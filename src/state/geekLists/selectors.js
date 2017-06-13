@@ -1,25 +1,34 @@
 import { createSelector } from 'reselect'
 
-import { getAllItems } from 'tenbyten/state/items/selectors'
+import { Item } from 'tenbyten/state/items/selectors'
+import Denormalizer from 'tenbyten/utils/Denormalizer'
+
+export class GeekList extends Denormalizer {
+  get collection () {
+    return this.state.geekLists
+  }
+
+  get items () {
+    return this.data.itemIds.map(itemId => {
+      return new Item(this.state, itemId)
+    })
+  }
+}
 
 export function getCurrentGeekListId (state) {
   return state.router.params.listId
 }
 
 export function getAllGeekLists (state) {
-  return state.geekLists
+  return Object.keys(state.geekLists)
+    .map(key => new GeekList(state, key))
 }
 
-export const getCurrentGeekList = createSelector(
-  getCurrentGeekListId, getAllGeekLists, getAllItems,
-  function (geekListId, allGeekLists, allItems) {
-    if (!(geekListId in allGeekLists)) {
-      return null
-    }
-    const geekList = allGeekLists[geekListId]
-    return {
-      id: geekList.id,
-      items: geekList.items.map(itemId => allItems[itemId]),
-    }
+export const getCurrentGeekList = state => {
+  const listId = state.router.params.listId
+  if (listId in state.geekLists) {
+    return new GeekList(state, listId)
+  } else {
+    return null
   }
-)
+}

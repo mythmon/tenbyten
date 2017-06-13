@@ -5,7 +5,7 @@ import 'semantic-ui-css/components/table.css'
 import { createStructuredSelector } from 'reselect'
 
 import { getCurrentSessionsByItem } from 'tenbyten/state/sessions/selectors'
-import { getCurrentGeekList } from 'tenbyten/state/geekLists/selectors'
+import { GeekList, getCurrentGeekList } from 'tenbyten/state/geekLists/selectors'
 
 import SessionsRow from 'tenbyten/components/SessionsRow'
 
@@ -16,12 +16,7 @@ import SessionsRow from 'tenbyten/components/SessionsRow'
 export default class SessionsTable extends Component {
   static propTypes = {
     sessionsByItem: pt.object,
-    geekList: pt.shape({
-      items: pt.arrayOf(pt.shape({
-        id: pt.number.isRequired,
-        name: pt.string.isRequired,
-      })),
-    }),
+    geekList: pt.instanceOf(GeekList),
   }
 
   render () {

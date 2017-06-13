@@ -21,7 +21,7 @@ export function requestGeekList (listId) {
 
     let geekListObj = {
       id: parseInt(geekList.getAttribute('id')),
-      items: Array.from(geekList.querySelectorAll('item')).map(item => {
+      itemIds: Array.from(geekList.querySelectorAll('item')).map(item => {
         const itemObj = {
           id: parseInt(item.getAttribute('objectid')),
           name: item.getAttribute('objectname'),
