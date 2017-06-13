@@ -20,13 +20,9 @@ const { routerEnhancer, routerMiddleware } = routerForBrowser({
 })
 
 const logger = createLogger({
-  colors: {
-    title: false,
-    prevState: false,
-    action: false,
-    nextState: false,
-    error: false,
-  },
+  collapsed: true,
+  duration: true,
+  timestamp: true,
 })
 
 const fixRouterActionsMiddleware = store => next => action => {
