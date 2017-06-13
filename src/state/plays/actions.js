@@ -1,5 +1,4 @@
 import moment from 'moment'
-import yaml from 'js-yaml'
 
 import { updateItemMany } from 'tenbyten/state/items/actions'
 import { updatePlayerMany } from 'tenbyten/state/players/actions'
@@ -64,23 +63,12 @@ export function requestPlayList (username, startDate, endDate, page = 1) {
         creator,
         id: parseInt(play.getAttribute('id')),
         date: moment(play.getAttribute('date'), 'YYYY-MM-DD', true),
-        item: itemObj.id,
+        itemId: itemObj.id,
         comments: comments ? comments.textContent : null,
-        commentsParsed: null,
         length: parseInt(play.getAttribute('length')),
         players: [],
       }
 
-      if (playObj.comments && playObj.comments !== '') {
-        try {
-          let parsed = yaml.safeLoad(playObj.comments)
-          if (typeof parsed === 'object') {
-            playObj.commentsParsed = parsed
-          }
-        } catch (e) {
-          // pass
-        }
-      }
       if (isNaN(playObj.length)) {
         playObj.length = null
       }

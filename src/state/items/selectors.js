@@ -2,7 +2,7 @@ import Denormalizer from 'tenbyten/utils/Denormalizer'
 import lazyGetter from 'tenbyten/utils/lazyGetter'
 import { getPlaysByItem } from 'tenbyten/state/plays/selectors'
 
-class Item extends Denormalizer {
+export class Item extends Denormalizer {
   get collection () {
     return this.state.items
   }
