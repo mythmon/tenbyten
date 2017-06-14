@@ -21,7 +21,6 @@ module.exports = {
   entry: {
     main: [
       './src/404.js',
-      'babel-polyfill',
       'normalize.css',
       'semantic-ui-css/semantic.css',
       './src/style.css',
@@ -46,10 +45,6 @@ module.exports = {
     new webpack.DefinePlugin(getVersionInfo()),
   ],
 
-  performance: {
-    hints: false,
-  },
-
   output: {
     path: local('build'),
     filename: '[name].js',
@@ -61,15 +56,22 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        loader: 'file-loader',
+        use: {
+          loader: 'file-loader',
+          query: {
+            useRelativePath: true,
+            outputPath: 'assets/',
+            publicPath: '/assets/',
+          },
+        },
       },
     ],
   },
