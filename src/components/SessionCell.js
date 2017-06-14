@@ -102,7 +102,7 @@ export default class SessionCell extends React.Component {
         console.log(`board: ${commentsParsed.board} -> ${code}`)
         if (code) {
           icons.push(
-            <span name={`board-${code}`} key={`board-${code}`} title='board: ${commentsParsed.board}'>
+            <span name={`board-${code}`} key={`board-${code}`} title={`board: ${commentsParsed.board}`}>
               <FlagIcon code={code} size='12' />
             </span>
           )

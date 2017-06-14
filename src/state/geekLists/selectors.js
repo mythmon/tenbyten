@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 import { Item } from 'tenbyten/state/items/selectors'
 import Denormalizer from 'tenbyten/utils/Denormalizer'
 
