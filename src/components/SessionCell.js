@@ -1,17 +1,22 @@
 import React, { PropTypes as pt } from 'react'
-import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
-import FaCommentingO from 'react-icons/lib/fa/commenting-o'
-import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
 import 'semantic-ui-css/components/label.css'
 import yaml from 'js-yaml'
 import _ from 'lodash'
+import FlagIconFactory from 'react-flag-icon-css'
+
+import FaQuestionCircle from 'react-icons/lib/fa/question-circle'
+import FaCommentingO from 'react-icons/lib/fa/commenting-o'
+import FaExclamationTriangle from 'react-icons/lib/fa/exclamation-triangle'
+import FaAndroid from 'react-icons/lib/fa/android'
 
 import weedIcon from 'tenbyten/imgs/icon_weed.svg'
 import PlayerIcon from 'tenbyten/components/PlayerIcon'
 import * as playerUtils from 'tenbyten/utils/players'
+
+const FlagIcon = FlagIconFactory(React, { useCssModules: false })
 
 export default class SessionCell extends React.Component {
   static propTypes = {
@@ -87,8 +92,41 @@ export default class SessionCell extends React.Component {
         }
       }
 
+      if ('board' in commentsParsed) {
+        const boardFlagMap = {
+          'germany': 'de',
+          'europe': 'eu',
+          'america': 'us',
+        }
+        const code = boardFlagMap[commentsParsed.board.toLowerCase()]
+        console.log(`board: ${commentsParsed.board} -> ${code}`)
+        if (code) {
+          icons.push(
+            <span name={`board-${code}`} key={`board-${code}`} title='board: ${commentsParsed.board}'>
+              <FlagIcon code={code} size='12' />
+            </span>
+          )
+          delete commentsParsed.board
+        }
+      }
+
+      if (commentsParsed.expansions) {
+        if (commentsParsed.expansions.indexOf('robots') !== -1) {
+          icons.push(
+            <span name='expansion-robots' key='expansion-robots' title='Expansion: Robots'>
+              <FaAndroid />
+            </span>
+          )
+          commentsParsed.expansions = commentsParsed.expansions.filter(exp => exp !== 'robots')
+        }
+      }
+
+      if (commentsParsed.expansions && commentsParsed.expansions.length === 0) {
+        delete commentsParsed.expansions
+      }
+
       if (Object.keys(commentsParsed).length > 0) {
-        icons.push(
+        icons.unshift(
           <span name='extra' key='extra' title={yaml.safeDump(commentsParsed)}>
             <FaQuestionCircle />
           </span>
