@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form/Form.js'
 import 'semantic-ui-css/components/form.css'
 import moment from 'moment'
@@ -6,7 +7,7 @@ import { autobind } from 'core-decorators'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 
-export default class NavFields extends Component {
+export default class NavFields extends React.Component {
   static propTypes = {
     defaultUsername: pt.string,
     defaultListId: pt.number,

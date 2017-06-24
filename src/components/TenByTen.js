@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import moment from 'moment'
@@ -17,7 +18,7 @@ import * as challegeSelector from 'tenbyten/state/challenge/selectors'
   startDate: challegeSelector.getStartDate,
   endDate: challegeSelector.getEndDate,
 }))
-export default class TenByTen extends Component {
+export default class TenByTen extends React.Component {
   static propTypes = {
     listId: pt.number.isRequired,
     username: pt.string.isRequired,

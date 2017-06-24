@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import moment from 'moment'
@@ -12,7 +13,7 @@ import { getStartDate, getEndDate } from 'tenbyten/state/challenge/selectors'
   startDate: getStartDate,
   endDate: getEndDate,
 }))
-export default class ChallengeProgress extends Component {
+export default class ChallengeProgress extends React.Component {
   static propTypes = {
     sessions: pt.array.isRequired,
     startDate: pt.instanceOf(moment).isRequired,

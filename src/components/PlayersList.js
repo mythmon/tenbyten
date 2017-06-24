@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -8,7 +9,7 @@ import PlayerLabel from 'tenbyten/components/PlayerLabel'
 @connect(createStructuredSelector({
   players: getCurrentPlayers,
 }))
-export default class SessionsTable extends Component {
+export default class SessionsTable extends React.Component {
   static propTypes = {
     players: pt.arrayOf(pt.shape({
       id: pt.string.isRequired,

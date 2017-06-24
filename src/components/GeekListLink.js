@@ -1,4 +1,5 @@
-import React, { PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { Link } from 'redux-little-router'
 
 export default class GeekListLink extends React.Component {

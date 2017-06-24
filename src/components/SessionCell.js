@@ -1,4 +1,5 @@
-import React, { PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
@@ -103,7 +104,7 @@ export default class SessionCell extends React.Component {
         if (code) {
           icons.push(
             <span name={`board-${code}`} key={`board-${code}`} title={`board: ${commentsParsed.board}`}>
-              <FlagIcon code={code} size='12' />
+              <FlagIcon code={code} />
             </span>
           )
           delete commentsParsed.board

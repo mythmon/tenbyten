@@ -1,10 +1,11 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
 
 import SessionCell from 'tenbyten/components/SessionCell'
 
-export default class SessionsRow extends Component {
+export default class SessionsRow extends React.Component {
   static propTypes = {
     item: pt.shape({
       id: pt.number.isRequired,

@@ -1,11 +1,12 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
 import 'semantic-ui-css/components/label.css'
 
 import PlayerIcon from 'tenbyten/components/PlayerIcon'
 import * as playerUtils from 'tenbyten/utils/players'
 
-export default class PlayerLabel extends Component {
+export default class PlayerLabel extends React.Component {
   static propTypes = {
     player: pt.shape({
       id: pt.string.isRequired,

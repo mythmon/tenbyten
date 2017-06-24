@@ -17,6 +17,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.0",
     "normalize.css": "^5.0.0",
+    "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",

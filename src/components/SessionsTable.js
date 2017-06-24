@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { connect } from 'react-redux'
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table/Table.js'
 import 'semantic-ui-css/components/table.css'
@@ -13,7 +14,7 @@ import SessionsRow from 'tenbyten/components/SessionsRow'
   sessionsByItem: getCurrentSessionsByItem,
   geekList: getCurrentGeekList,
 }))
-export default class SessionsTable extends Component {
+export default class SessionsTable extends React.Component {
   static propTypes = {
     sessionsByItem: pt.object,
     geekList: pt.instanceOf(GeekList),

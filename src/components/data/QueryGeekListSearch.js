@@ -1,4 +1,5 @@
-import { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -10,7 +11,7 @@ import { searchForGeekLists } from 'tenbyten/state/geekListSearch/actions'
   }),
   dispatch => bindActionCreators({searchForGeekLists}, dispatch),
 )
-export default class QueryGeekListSearch extends Component {
+export default class QueryGeekListSearch extends React.Component {
   static propTypes = {
     username: pt.string,
     searchForGeekLists: pt.func.isRequired,

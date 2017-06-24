@@ -1,4 +1,5 @@
-import React, { PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label/Label.js'
 import 'semantic-ui-css/components/label.css'
 import {color, displayName, iconLetter} from 'tenbyten/utils/players'

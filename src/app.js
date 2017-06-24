@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'redux-little-router'
 
@@ -8,7 +9,7 @@ import App from 'tenbyten/components/App'
 /**
  * Root Component for the entire app.
  */
-class Root extends Component {
+class Root extends React.Component {
   static propTypes = {
     store: pt.object.isRequired,
   }

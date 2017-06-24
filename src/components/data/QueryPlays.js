@@ -1,4 +1,5 @@
-import { Component, PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import moment from 'moment'
@@ -15,7 +16,7 @@ import { getUsername, getStartDate, getEndDate } from 'tenbyten/state/challenge/
   }),
   dispatch => bindActionCreators({requestPlayList}, dispatch),
 )
-export default class QueryPlays extends Component {
+export default class QueryPlays extends React.Component {
   static propTypes = {
     username: pt.string.isRequired,
     startDate: pt.instanceOf(moment).isRequired,

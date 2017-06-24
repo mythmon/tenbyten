@@ -1,4 +1,5 @@
-import React, { PropTypes as pt } from 'react'
+import React from 'react'
+import pt from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
