@@ -13,7 +13,7 @@ export default class GeekListLink extends React.Component {
     const { title, id, creator } = this.props
     return (
       <div>
-        <Link href={`/table/${id}/${creator}/`}>{title}</Link>
+        <Link href={`/${id}/${creator}/table`}>{title}</Link>
       </div>
     )
   }

@@ -41,7 +41,7 @@ export default class NavFields extends React.Component {
     ev.preventDefault()
     const {name, list, startDate, endDate} = this.state
     const onGithub = window.location.hostname.indexOf('github.io') !== -1
-    let newUrl = `/table/${list}/${name}/?startDate=${startDate}&endDate=${endDate}`
+    let newUrl = `/${list}/${name}/table?startDate=${startDate}&endDate=${endDate}`
     if (onGithub) {
       newUrl = '/tenbyten' + newUrl
     }

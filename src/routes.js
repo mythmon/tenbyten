@@ -7,6 +7,7 @@ import Home from 'tenbyten/components/Home'
 export default {
   '/': {},
   '/table/:listId/:username/': {},
+  '/:listId/:username/table': {},
 }
 
 export const RouteFragments = (
@@ -15,6 +16,9 @@ export const RouteFragments = (
       <Home />
     </Fragment>
     <Fragment forRoute='/table/:listId/:username/'>
+      <TenByTen />
+    </Fragment>
+    <Fragment forRoute='/:listId/:username/table'>
       <TenByTen />
     </Fragment>
   </div>
